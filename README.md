@@ -29,5 +29,10 @@ test: http://localhost:5000/
 ###Deploy to Github
 git add .  
 git gui
-git commit -m "init"
+git commit -m "init"  
 git push origin master
+
+###Deploy to Heroku
+heroku create  
+git push heroku master  
+heroku ps:scale web=1 
