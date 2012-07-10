@@ -42,3 +42,7 @@ heroku addons:add mongolab:starter
 heroku ps  
 heroku restart  
 heroku open   
+
+##Implement Compass
+compass create
+compass watch
