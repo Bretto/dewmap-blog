@@ -1,0 +1,52 @@
+<article>
+    <div class="box-wrapper">
+        <div class="is-black is-float-right">
+            <div class="is-high-light"></div>
+            <div class="centered-text-wrapper ">
+                <!--<time class="is-centered-text"><strong>{{PostSrv.post.date}}</strong><br>{{PostSrv.post.year}}</time>-->
+            </div>
+        </div>
+        <div class="title-input-wrapper">
+            <input class="post-title title-input" ng-model="post.title"/>
+        </div>
+    </div>
+    <div class="post-group">
+        <div class="is-float-right centered-img-wrapper is-control is-clear" ng-click="PostSrv.onRead(post._id)">
+            <div class="control-wrapper">
+                <i class="icon-eye-open"></i>
+            </div>
+        </div>
+        <div class="is-float-right centered-img-wrapper is-control is-clear" ng-click="PostSrv.onCancel()">
+            <div class="control-wrapper">
+                <i class="icon-remove"></i>
+            </div>
+        </div>
+        <div class="is-float-right centered-img-wrapper is-control is-clear" ng-click="PostSrv.onSave(post)">
+            <div class="control-wrapper">
+                <i class="icon-save"></i>
+            </div>
+        </div>
+        <div class="is-float-right centered-img-wrapper is-control is-clear" ng-click="PostSrv.onDestroy(post)">
+            <div class="control-wrapper">
+                <i class="icon-trash"></i>
+            </div>
+        </div>
+        <div class="post-wrapper">
+            <textarea class="post-input" ng-model="post.text"/>
+            <footer class="post-content">
+                <nav>
+                    <div class="is-float-left centered-img-wrapper is-control">
+                        <div class="control-wrapper">
+                            <i class="icon-arrow-left"></i>
+                        </div>
+                    </div>
+                    <div class="is-float-right centered-img-wrapper is-control">
+                        <div class="control-wrapper">
+                            <i class="icon-arrow-right"></i>
+                        </div>
+                    </div>
+                </nav>
+            </footer>
+        </div>
+    </div>
+</article>

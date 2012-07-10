@@ -1,0 +1,28 @@
+<div ng-controller="PostsCtrl">
+    <div class="is-float-right centered-img-wrapper is-control" ng-class="PostSrv.isAdminClass()" ng-click="PostSrv.onNew()">
+        <div class="control-wrapper">
+            <i class="icon-plus"></i>
+        </div>
+    </div>
+    <div class="is-clear box-wrapper" ng-class="PostSrv.isAdminClass()"/>
+    <ul>
+        <li ng-repeat="post in posts">
+            <div class="is-float-right centered-img-wrapper is-control is-clear" ng-class="PostSrv.isAdminClass()">
+                    <div class="control-wrapper" ng-click="PostSrv.onEdit(post._id)">
+                        <i class="icon-pencil"></i>
+                    </div>
+            </div>
+            <article class="box-wrapper post-title-wrapper" ng-click="PostSrv.onRead(post._id)">
+                    <div class="is-black is-float-right">
+                        <div class="is-high-light"></div>
+                        <div class="centered-text-wrapper ">
+                            <!--<time class="is-centered-text"><strong>{{post.date}}</strong><br>{{post.year}}</time>-->
+                        </div>
+                    </div>
+                    <div class="centered-text-wrapper">
+                        <label class="post-title is-centered-text">{{post.title}}</label>
+                    </div>
+            </article>
+        </li>
+    </ul>
+</div>
