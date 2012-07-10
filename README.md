@@ -26,6 +26,8 @@ npm install
 foreman start  
 test: http://localhost:5000/
 
-###Deploy
+###Deploy to Github
 git add .  
-$ git commit -m "init"
+git gui
+git commit -m "init"
+git push origin master
