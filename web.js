@@ -42,17 +42,9 @@ app.configure(function () {
     app.use(express.logger('dev'));  //tiny, short, default
     app.use(allowCrossDomain);
     app.use(app.router);
-    app.use(express.static(__dirname + '/app'));
+    app.use(express.static(__dirname + '/public'));
     app.use(express.errorHandler({dumpExceptions: true, showStack: true, showMessage: true}));
 });
-
-
-var objectId = function (_id) {
-    if (_id.length === 24 && parseInt(db.ObjectId(_id).getTimestamp().toISOString().slice(0,4), 10) >= 2010) {
-        return db.ObjectId(_id);
-    }
-    return _id;
-}
 
 
 //Function callback
@@ -72,32 +64,34 @@ var fn = function (req, res) {
     return fn;
 };
 
-app.get('/', function(request, response) {
-    response.send('Hello World! by Brett');
+app.get('/', function(req, res) {
+    //response.send('Hello Rerun Express Local :)');
+    res.sendfile('/index.html');
+    //or redirect ?
 });
 
 //Query
-app.get('/:collection', function(req, res) {
+app.get('/api/:collection', function(req, res) {
     db.collection(req.params.collection).find({}).toArray(fn(req, res));
 });
 
 //Get by Id
-app.get('/:collection/:id', function(req, res) {
+app.get('/api/:collection/:id', function(req, res) {
     db.collection(req.params.collection).findOne({_id: ObjectID(req.params.id)}, fn(req, res));
 });
 
 //Create
-app.post('/:collection', function(req, res) {
+app.post('/api/:collection', function(req, res) {
     db.collection(req.params.collection).save(req.body, {safe:true}, fn(req, res));
 });
 
 //Update
-app.put('/:collection/:id', function(req, res) {
+app.put('/api/:collection/:id', function(req, res) {
     db.collection(req.params.collection).update({_id: ObjectID(req.params.id)}, req.body, {safe:true}, fn(req, res));
 });
 
 //Delete
-app.del('/:collection/:id', function(req, res) {
+app.del('/api/:collection/:id', function(req, res) {
     db.collection(req.params.collection).remove({_id: ObjectID(req.params.id)}, {safe:true}, fn(req, res));
 });
 

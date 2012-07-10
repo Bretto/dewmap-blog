@@ -10,7 +10,7 @@ git push -u origin master
 
   
 ##Heroky Setup
-
+<https://devcenter.heroku.com/articles/nodejs>
 heroku login  
 
 ###include
@@ -23,7 +23,9 @@ heroku login
 npm install 
 
 ####Run app localy
-foreman start  
+<https://github.com/alexch/rerun>  
+rerun foreman start  
+ctrl c to stop
 test: http://localhost:5000/
 
 ###Deploy to Github
@@ -44,5 +46,5 @@ heroku restart
 heroku open   
 
 ##Implement Compass
-compass create
+compass create  
 compass watch
