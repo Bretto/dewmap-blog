@@ -34,5 +34,11 @@ git push origin master
 
 ###Deploy to Heroku
 heroku create  
-git push heroku master  
-heroku ps:scale web=1 
+git push heroku master    
+heroku ps:scale web=1  
+heroku logs    
+heroku config:add NODE_ENV=production  
+heroku addons:add mongolab:starter  
+heroku ps  
+heroku restart  
+heroku open   
