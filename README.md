@@ -48,3 +48,18 @@ heroku open
 ##Implement Compass
 compass create  
 compass watch
+
+##Start MongoDB localy
+<http://www.mongodb.org/display/DOCS/Overview+-+The+MongoDB+Interactive+Shell>
+mongod --dbpath=Sites/mongodb  
+mongo in the shell: mongo  
+
+	show dbs	 displays all the databases on the server you are connected to
+	use db_name	 switches to db_name on the same server
+	show collections	 displays a list of all the collections in the current database
+	
+##Mongodb Node Native Driver
+<http://mongodb.github.com/node-mongodb-native/api-generated/>
+
+##Resources
+<http://vimeo.com/38136668>	

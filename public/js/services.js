@@ -27,12 +27,27 @@ var services = angular.module('myApp.services', ['ngResource']);
 //    });
 
 
-services.factory('PostRes', function($resource) {
-    var PostRes = $resource('http://young-leaf-5971.herokuapp.com/post/:id',
-    { id: '@_id' }, {
-            update: { method: 'PUT' }
-        }
-    );
+services.factory('PostRes', function($resource, $location) {
+
+    var urlPrefix,
+        PostRes;
+
+    if($location.host() === 'localhost'){
+        urlPrefix = $location.protocol() + '://' + $location.host() + '::PORT/api/post/:id';
+        PostRes = $resource(urlPrefix,
+            { id: '@_id', PORT:'5000' }, {
+                update: { method: 'PUT' }
+            }
+        );
+    }else{
+        urlPrefix = 'http://cold-dusk-1881.herokuapp.com/api/post/:id';
+        PostRes = $resource(urlPrefix,
+            { id: '@_id'}, {
+                update: { method: 'PUT' }
+            }
+        );
+    }
+
 
     PostRes.prototype.update = function(cb) {
             return PostRes.update({id: this._id},
@@ -51,13 +66,19 @@ services.factory('PostRes', function($resource) {
 services.factory('PostSrv', function( $routeParams, PostRes, $location ) {
 
     var PostSrv = {
-        selectPost: function (idx) {
-        },
 
         isAdmin: false,
 
         isAdminClass : function(){
             if(!PostSrv.isAdmin) return 'is-not-admin';
+        },
+
+        onAdmin: function(){
+            PostSrv.isAdmin = (PostSrv.isAdmin) ? false : true;
+        },
+
+        onQuery: function(){
+            $location.path("post/");
         },
 
         onRead: function(id){
@@ -66,6 +87,10 @@ services.factory('PostSrv', function( $routeParams, PostRes, $location ) {
 
         onEdit: function(id){
             $location.path("post/"+ id +"/edit");
+        },
+
+        onCancel: function(id){
+            $location.path("post/");
         },
 
         onNew: function(){
@@ -80,8 +105,9 @@ services.factory('PostSrv', function( $routeParams, PostRes, $location ) {
 
         onSave: function(post){
             if(post._id == undefined){
+
                 PostRes.save(post, function(post) {
-                    $location.path('/post/' + post._id + '/edit');
+                    $location.path('post/' + post._id + '/edit');
                 });
             }else{
                 post.update(function() {

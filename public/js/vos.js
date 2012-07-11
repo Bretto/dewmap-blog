@@ -1,6 +1,5 @@
-function PostVO(date, year, title, text){
-    this.date = !date ? moment(new Date()).format('MMM D'): date;
-    this.year = !year ? moment().year() : year;
+function PostVO(date, title, text){
+    this.date = !date ? new Date().getTime(): date;
     this.title = title;
     this.text = text;
 }
