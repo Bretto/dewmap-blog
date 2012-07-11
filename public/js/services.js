@@ -1,31 +1,6 @@
 'use strict';
 
-
-// Demonstrate how to register services
-// In this case it is a simple constant service.
 var services = angular.module('myApp.services', ['ngResource']);
-
-
-//https://api.mongolab.com/api/1/databases/dewmapdb/collections?apiKey=4fd02554e4b03c95aa78700a
-//services.factory('PostRes', function($resource) {
-//    var PostRes = $resource('https://api.mongolab.com/api/1/databases/dewmapdb/collections/post/:id',
-//        { apiKey: '4fd02554e4b03c95aa78700a' }, {
-//            update: { method: 'PUT' }
-//        }
-//    );
-//
-//    PostRes.prototype.update = function(cb) {
-//            return PostRes.update({id: this._id.$oid},
-//                angular.extend({}, this, {_id:undefined}), cb);
-//        };
-//
-//    PostRes.prototype.destroy = function(cb) {
-//            return PostRes.remove({id: this._id.$oid}, cb);
-//        };
-//
-//        return PostRes;
-//    });
-
 
 services.factory('PostRes', function($resource, $location) {
 
