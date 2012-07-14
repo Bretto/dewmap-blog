@@ -325,6 +325,7 @@ angular.module('ngResource', ['ng']).
 
       forEach(actions, function(action, name) {
         var hasBody = action.method == 'POST' || action.method == 'PUT' || action.method == 'PATCH';
+        var cache = typeof action.cache !=="undefined" ? action.cache : false;  //monkey patch
         Resource[name] = function(a1, a2, a3, a4) {
           var params = {};
           var data;
@@ -368,10 +369,11 @@ angular.module('ngResource', ['ng']).
           $http({
             method: action.method,
             url: route.url(extend({}, extractParams(data), action.params || {}, params)),
-            data: data
+            data:data,
+            cache:cache // monkey patch
           }).then(function(response) {
               var data = response.data;
-
+              //value.__proto__.config = response.config; //monkey patch
               if (data) {
                 if (action.isArray) {
                   value.length = 0;
@@ -384,7 +386,6 @@ angular.module('ngResource', ['ng']).
               }
               (success||noop)(value, response.headers);
             }, error);
-
           return value;
         };
 
@@ -419,9 +420,9 @@ angular.module('ngResource', ['ng']).
           Resource[name].call(this, params, data, success, error);
         };
       });
+//      Resource.prototype.url = route.url(extend({}, extractParams(data), action.params || {}, params));
       return Resource;
     }
-
     return ResourceFactory;
   }]);
 

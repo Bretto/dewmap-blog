@@ -3341,7 +3341,13 @@ function $CacheFactoryProvider() {
 
         info: function() {
           return extend({}, stats, {size: size});
+        },
+
+        data: function() { // monkey patch
+            return data;
         }
+
+
       };
 
 

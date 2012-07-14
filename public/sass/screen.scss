@@ -3,4 +3,400 @@
  * Import this file using the following HTML or equivalent:
  * <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css" /> */
 
-@import "compass/reset";
+@import "base.scss";
+
+* {
+  -webkit-box-sizing: border-box;
+  -moz-box-sizing:    border-box;
+  box-sizing:         border-box;
+}
+
+
+html, body {
+  margin: 1px;
+  font-size: 16px;
+  font-style: normal;
+  color: $para-color;
+  font-variant: normal;
+  font-weight: 300;
+  line-height: 26px;
+  height: 100%;
+  font-family: 'lato';
+}
+
+
+.dp-icon {
+  height: $box-size;
+  width: $box-size;
+  background: rgba(red, 1);
+}
+
+.icon-wrapper{
+  font-size: 40px;
+  color: #ffffff;
+}
+
+.dewmap-logo{
+  padding-left: $gap - 5px;
+}
+
+label {
+
+}
+
+//.post-group{
+//  overflow: hidden;
+//}
+
+.post-menu{
+  width: $box-size;
+  background-color: red;
+  float: left;
+  margin-bottom: -99999px;
+  padding-bottom: 99999px;
+
+}
+
+.post-wrapper{
+  padding: $gap;
+  padding-right: $box-size + $gap;
+  max-width: $content-width;
+
+  p{
+    margin-bottom: 30px;
+    text-align:justify;
+  }
+
+  strong {
+    color: #000000;
+    font-weight: bold;
+  }
+
+  h1{
+    color: #000000;
+    font-size: 28px;
+    text-transform: uppercase;
+    font-weight: 700;
+    margin-bottom: $gap;
+  }
+
+  h2{
+    color: #000000;
+    font-size: 24px;
+    text-transform: uppercase;
+    font-weight: 700;
+    margin-bottom: $gap;
+  }
+}
+
+
+.post-input{
+  font-size: 16px;
+  font-family: 'verdana';
+  width: 100%;
+  resize: none;
+  max-width: $content-width - ($box-size + $gap);
+  min-height: 700px;
+}
+
+
+.nav-title{
+  color: #000000;
+  text-transform: uppercase;
+  font-size: 16px;
+  font-weight: bold;
+  padding-left: $gap;
+  white-space: nowrap;
+}
+
+.nav-title-wrapper-black{
+  &:hover{
+    background: #000000;
+    label{
+      color: #ffffff;
+    }
+  }
+}
+
+.nav-title-wrapper-c1{
+  &:hover{
+    background: $c1;
+    label{
+      color: #ffffff;
+    }
+  }
+}
+
+.nav-title-wrapper-c2{
+  &:hover{
+    background: $c2;
+    label{
+      color: #ffffff;
+    }
+  }
+}
+
+.nav-title-wrapper-c3{
+  &:hover{
+    background: $c3;
+    label{
+      color: #ffffff;
+    }
+  }
+}
+
+.nav-title-wrapper-c4{
+  &:hover{
+    background: $c4;
+    label{
+      color: #ffffff;
+    }
+  }
+}
+
+.nav-title-wrapper-c5{
+  &:hover{
+    background: $c5;
+    label{
+      color: #ffffff;
+    }
+  }
+}
+
+
+.post-title-wrapper{
+  &:hover{
+    background: $c1;
+    label{
+      color: #ffffff;
+    }
+    .is-black{
+      background: $c1;
+    }
+  }
+}
+
+
+
+.post-title{
+  color: #000000;
+  text-transform: uppercase;
+  font-size: 33px;
+  font-weight: bold;
+  padding-left: $gap;
+  white-space: nowrap;
+}
+
+
+time{
+  line-height: 17px;
+  font-size: 14px;
+  text-align: center;
+  color: #ffffff;
+  text-transform: uppercase;
+  strong{
+    font-weight:bold;
+  }
+}
+
+.is-high-light{
+  margin: 5px;
+  position: absolute;
+  width: 77px;
+  background: rgba(white, .3);
+  height: 30px;
+  @include border-bottom-radius(30px);
+}
+
+
+.red-help{
+  border: solid red 1px;
+  background: rgba(red, .1);
+}
+
+.blue-help{
+  border: solid blue 1px;
+  background: rgba(blue, .1);
+}
+
+
+aside {
+  width: $nav-width;
+  float: left;
+}
+
+.is-black{
+  background: rgba(black, 1);
+}
+
+.is-red{
+  background: rgba(red, 1);
+}
+
+.is-c1{
+  background: rgba($c1, 1);
+}
+
+.is-c2{
+  background: rgba($c2, 1);
+}
+
+.is-c3{
+  background: rgba($c3, 1);
+}
+
+.is-c4{
+  background: rgba($c4, 1);
+}
+
+.is-c5{
+  background: rgba($c5, 1);
+}
+
+.is-float-right{
+  float: right;
+}
+
+.is-float-left{
+  float: left;
+}
+
+.is-clear{
+  clear: both;
+}
+
+.control-wrapper{
+  margin-top: -4px;
+  font-size: 40px;
+  color: $border-color;
+}
+
+.is-control{
+  height: $box-size;
+  width: $box-size;
+  @include border-radius(85px);
+  border: solid $border-color 5px;
+  &:hover{
+    border-color: $c6;
+    background: $c6;
+    i{
+      color: #ffffff;
+    }
+  }
+}
+
+.title-input-wrapper{
+  max-width: $content-width;
+  line-height: $box-size;
+  padding-left: $gap;
+  padding-right: $gap + $box-size;
+}
+
+.date-input-wrapper{
+  padding: 20px 5px;
+  width: $box-size;
+  height: $box-size;
+}
+
+.date-input{
+  width: 100%;
+  line-height: 17px;
+  font-size: 14px;
+  text-align: center;
+  text-transform: uppercase;
+  resize: none;
+  //vertical-align: middle;
+}
+
+
+.title-input{
+  width: 100%;
+  padding-left: 0;
+  vertical-align: middle;
+}
+
+.is-inline-block{
+  display: inline-block;
+  vertical-align: middle;
+}
+
+jl-markdown{
+  display: block;
+}
+
+
+section{
+  overflow-y: scroll;
+  height: 100%;
+  margin-left: $nav-width;
+}
+
+.box-wrapper{
+  overflow: hidden;
+  //border: solid #aaa 1px;
+  border-bottom: solid $border-color 1px;
+  display: block;
+}
+
+.main-content{
+  border-left: solid $border-color 1px;
+  >ul{
+    margin: 0;
+    >li{
+      list-style-type: none;
+    }
+  }
+}
+
+
+
+blockquote{
+  font-size: 18px;
+  border-color: $c1 !important;
+  border-left: 10px solid;
+  padding-left: 20px;
+  display: inline-block;
+  padding-bottom: 0;
+  margin-left: 0;
+  margin-top: 5px;
+  margin-bottom: 10px;
+  p{
+    margin-bottom: 10px !important;
+  }
+}
+
+
+
+.centered-text-wrapper{
+  width: $box-size;
+  height: $box-size;
+  display: table;
+}
+
+.centered-img-wrapper{
+  width: $box-size;
+  height: $box-size;
+  line-height: $box-size;
+  text-align: center;
+}
+
+.is-centered-img{
+  margin:auto;
+  vertical-align: middle;
+  text-align: center;
+}
+
+.is-centered-text{
+  display: table-cell;
+  vertical-align: middle;
+  text-align: center;
+}
+
+.is-not-admin{
+  display: none;
+}
+
+
+.ng-scope{
+ // border: solid red 1px;
+}

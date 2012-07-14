@@ -9,7 +9,6 @@ function PostsCtrl($scope , $location, PostRes, PostSrv){
 PostsCtrl.$inject = ['$scope', '$location', 'PostRes', 'PostSrv'];
 
 
-
 function PostCtrl($scope , $log, $location, $routeParams, PostSrv, PostRes){
     $log.info('PostCtrl');
     $scope.PostSrv = PostSrv;
@@ -18,12 +17,12 @@ function PostCtrl($scope , $log, $location, $routeParams, PostSrv, PostRes){
 PostCtrl.$inject = ['$scope', '$log', '$location', '$routeParams', 'PostSrv', 'PostRes'];
 
 
-function EditPostCtrl($scope , $log, $location, $routeParams, PostSrv, PostRes){
+function EditPostCtrl($scope , $log, $routeParams, PostSrv, PostRes){
     $log.info('EditPostCtrl');
     $scope.PostSrv = PostSrv;
     $scope.post = PostRes.get({id: $routeParams.postId});
 }
-EditPostCtrl.$inject = ['$scope', '$log', '$location', '$routeParams', 'PostSrv', 'PostRes'];
+EditPostCtrl.$inject = ['$scope', '$log', '$routeParams', 'PostSrv', 'PostRes'];
 
 
 function CreatePostCtrl($scope , $location, PostRes, PostSrv){

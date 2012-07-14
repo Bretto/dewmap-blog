@@ -1,28 +1,50 @@
 'use strict';
 
+
+
+
+
 var services = angular.module('myApp.services', ['ngResource']);
 
-services.factory('PostRes', function($resource, $location) {
+services.constant('endPointPrefix', '/api/post');
 
-    var urlPrefix,
+
+services.factory('HttpCache',function($cacheFactory)
+{
+    //To get the Resource to cache response
+    return $cacheFactory('HttpCacheName');
+});
+
+
+services.factory('PostRes', function($resource, $location, HttpCache, endPointPrefix) {
+
+    var url,
         PostRes;
 
     if($location.host() === 'localhost'){
-        urlPrefix = $location.protocol() + '://' + $location.host() + '::PORT/api/post/:id';
-        PostRes = $resource(urlPrefix,
+        url = $location.protocol() + '://' + $location.host() + '::PORT' + endPointPrefix + '/:id';
+        PostRes = $resource(url,
             { id: '@_id', PORT:'5000' }, {
+                get: {
+                    method:"GET",
+                    cache:HttpCache  /*using our injected cache-factory */
+                },
+                query: {
+                    method:"GET",
+                    isArray:true,
+                    cache:HttpCache  /*using our injected cache-factory */
+                },
                 update: { method: 'PUT' }
             }
         );
     }else{
-        urlPrefix = 'http://cold-dusk-1881.herokuapp.com/api/post/:id';
-        PostRes = $resource(urlPrefix,
+        url = 'http://cold-dusk-1881.herokuapp.com' + endPointPrefix + '/:id';
+        PostRes = $resource(url,
             { id: '@_id'}, {
                 update: { method: 'PUT' }
             }
         );
     }
-
 
     PostRes.prototype.update = function(cb) {
             return PostRes.update({id: this._id},
@@ -38,9 +60,26 @@ services.factory('PostRes', function($resource, $location) {
 
 
 
-services.factory('PostSrv', function( $routeParams, PostRes, $location ) {
+services.factory('PostSrv', function( $routeParams, PostRes, $location, HttpCache, endPointPrefix ) {
+
+
+    function getCacheKey(id){
+
+        var PORT = ( $location.port() === null )? '' : ':' + $location.port() ;
+        var KEY = $location.protocol() + '://' + $location.host() + PORT + endPointPrefix;
+
+        if(id !== undefined){
+            KEY += '/' + id;
+        }
+
+
+        return KEY;
+    };
 
     var PostSrv = {
+
+        cache: HttpCache,
+        endPointPrefix: endPointPrefix,
 
         isAdmin: false,
 
@@ -73,6 +112,7 @@ services.factory('PostSrv', function( $routeParams, PostRes, $location ) {
         },
 
         onDestroy: function(post){
+            PostSrv.cache.remove(getCacheKey());
             post.destroy(function() {
                 $location.path('post/');
             });
@@ -80,11 +120,13 @@ services.factory('PostSrv', function( $routeParams, PostRes, $location ) {
 
         onSave: function(post){
             if(post._id == undefined){
-
+                PostSrv.cache.remove(getCacheKey());
                 PostRes.save(post, function(post) {
                     $location.path('post/' + post._id + '/edit');
                 });
             }else{
+                PostSrv.cache.remove(getCacheKey(post._id));
+
                 post.update(function() {
                     $location.path('post/');
                 });
