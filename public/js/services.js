@@ -62,33 +62,40 @@ services.factory('PostRes', function($resource, $location, HttpCache, endPointPr
 
 services.factory('PostSrv', function( $routeParams, PostRes, $location, HttpCache, endPointPrefix ) {
 
+    function deleteCachedPost(id){
+        var cacheKey = getCacheKey(id);
+        if(HttpCache.get(cacheKey)){
+            PostSrv.cache.remove(cacheKey);
+        }
+    }
 
     function getCacheKey(id){
-
         var PORT = ( $location.port() === null )? '' : ':' + $location.port() ;
         var KEY = $location.protocol() + '://' + $location.host() + PORT + endPointPrefix;
 
         if(id !== undefined){
             KEY += '/' + id;
         }
-
-
         return KEY;
-    };
+    }
+
 
     var PostSrv = {
 
+        originalPost: null,
         cache: HttpCache,
         endPointPrefix: endPointPrefix,
 
         isAdmin: false,
 
-        isAdminClass : function(){
-            if(!PostSrv.isAdmin) return 'is-not-admin';
-        },
-
         onAdmin: function(){
             PostSrv.isAdmin = (PostSrv.isAdmin) ? false : true;
+        },
+
+        isSaved: true,
+
+        isSavedClass: function(){
+          if(PostSrv.isSaved) return 'is-saved';
         },
 
         onQuery: function(){
@@ -104,7 +111,7 @@ services.factory('PostSrv', function( $routeParams, PostRes, $location, HttpCach
         },
 
         onCancel: function(id){
-            $location.path("post/");
+            $location.path("post/"+ id);
         },
 
         onNew: function(){
@@ -112,7 +119,7 @@ services.factory('PostSrv', function( $routeParams, PostRes, $location, HttpCach
         },
 
         onDestroy: function(post){
-            PostSrv.cache.remove(getCacheKey());
+            deleteCachedPost();
             post.destroy(function() {
                 $location.path('post/');
             });
@@ -120,18 +127,30 @@ services.factory('PostSrv', function( $routeParams, PostRes, $location, HttpCach
 
         onSave: function(post){
             if(post._id == undefined){
-                PostSrv.cache.remove(getCacheKey());
+                deleteCachedPost();
                 PostRes.save(post, function(post) {
+                    PostSrv.originalPost = new PostRes(post);
                     $location.path('post/' + post._id + '/edit');
                 });
             }else{
-                PostSrv.cache.remove(getCacheKey(post._id));
-
-                post.update(function() {
-                    $location.path('post/');
+                deleteCachedPost();
+                deleteCachedPost(post._id);
+                post.update(function(post) {
+                    PostSrv.originalPost = new PostRes(post);
                 });
             }
+        },
+
+        getPost: function(id){
+            return PostRes.get({id: id}, function(post) {
+                PostSrv.originalPost = new PostRes(post);
+            });
+        },
+
+        getPosts: function(){
+            return PostRes.query();
         }
+
     }
 
     return PostSrv;

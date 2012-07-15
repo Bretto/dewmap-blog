@@ -1,5 +1,5 @@
 <div ng-controller="PostsCtrl">
-    <div class="is-float-right centered-img-wrapper is-control" ng-class="PostSrv.isAdminClass()" ng-click="PostSrv.onNew()">
+    <div class="is-float-right centered-img-wrapper is-control" ng-show="PostSrv.isAdmin" ng-click="PostSrv.onNew()">
         <div class="control-wrapper">
             <i class="icon-plus"></i>
         </div>
@@ -7,13 +7,13 @@
     <div class="is-clear box-wrapper" ng-class="PostSrv.isAdminClass()"/>
     <ul>
         <li ng-repeat="post in posts">
-            <div class="is-float-right centered-img-wrapper is-control" ng-class="PostSrv.isAdminClass()"
+            <div class="is-float-right centered-img-wrapper is-control" ng-show="PostSrv.isAdmin"
                  ng-click="PostSrv.onDestroy(post)">
                 <div class="control-wrapper">
                     <i class="icon-trash"></i>
                 </div>
             </div>
-            <div class="is-float-right centered-img-wrapper is-control" ng-class="PostSrv.isAdminClass()">
+            <div class="is-float-right centered-img-wrapper is-control" ng-show="PostSrv.isAdmin">
                 <div class="control-wrapper" ng-click="PostSrv.onEdit(post._id)">
                     <i class="icon-pencil"></i>
                 </div>

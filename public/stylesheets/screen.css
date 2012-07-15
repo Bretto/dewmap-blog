@@ -502,3 +502,9 @@ blockquote p {
 .is-not-admin {
   display: none;
 }
+
+/* line 399, ../sass/screen.scss */
+.is-saved {
+  color: rgba(230, 230, 230, 0.2);
+  border-color: rgba(230, 230, 230, 0.2);
+}

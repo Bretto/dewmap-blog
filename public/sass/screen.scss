@@ -396,6 +396,11 @@ blockquote{
   display: none;
 }
 
+.is-saved{
+  color: rgba($border-color, .2);
+  border-color: rgba($border-color, .2);
+}
+
 
 .ng-scope{
  // border: solid red 1px;

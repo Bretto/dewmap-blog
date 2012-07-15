@@ -16,14 +16,15 @@
                 <i class="icon-eye-open"></i>
             </div>
         </div>
-        <div class="is-float-right centered-img-wrapper is-control is-clear" ng-click="PostSrv.onCancel()">
+        <div class="is-float-right centered-img-wrapper is-control is-clear" ng-click="PostSrv.onSave(post)"
+                ng-class="PostSrv.isSavedClass()" ng-disabled="isClean()">
             <div class="control-wrapper">
-                <i class="icon-remove"></i>
+                <i class="icon-save" ng-class="PostSrv.isSavedClass()"></i>
             </div>
         </div>
-        <div class="is-float-right centered-img-wrapper is-control is-clear" ng-click="PostSrv.onSave(post)">
+        <div class="is-float-right centered-img-wrapper is-control is-clear" ng-click="PostSrv.onCancel(post._id)">
             <div class="control-wrapper">
-                <i class="icon-save"></i>
+                <i class="icon-remove"></i>
             </div>
         </div>
         <div class="is-float-right centered-img-wrapper is-control is-clear" ng-click="PostSrv.onDestroy(post)">

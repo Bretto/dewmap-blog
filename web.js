@@ -87,7 +87,8 @@ app.post('/api/:collection', function(req, res) {
 
 //Update
 app.put('/api/:collection/:id', function(req, res) {
-    db.collection(req.params.collection).update({_id: ObjectID(req.params.id)}, req.body, {safe:true}, fn(req, res));
+    //db.collection(req.params.collection).update({_id: ObjectID(req.params.id)}, req.body, {safe:true, new:true}, fn(req, res));
+    db.collection(req.params.collection).findAndModify({_id: ObjectID(req.params.id)}, [], req.body, {new:true, upsert:true, safe:true}, fn(req, res));
 });
 
 //Delete

@@ -11,12 +11,17 @@
         </div>
     </div>
     <div class="post-group">
-        <div class="is-float-right centered-img-wrapper is-control is-clear" ng-class="PostSrv.isAdminClass()" ng-click="PostSrv.onEdit(post._id)">
-                <div class="control-wrapper">
-                    <i class="icon-pencil"></i>
-                </div>
+        <div class="is-float-right centered-img-wrapper is-control is-clear" ng-show="PostSrv.isAdmin" ng-click="PostSrv.onEdit(post._id)">
+            <div class="control-wrapper">
+                <i class="icon-pencil"></i>
+            </div>
         </div>
-
+        <div class="is-float-right centered-img-wrapper is-control is-clear" ng-click="PostSrv.onSave(post)"
+             ng-class="PostSrv.isSavedClass()" ng-disabled="isClean()" ng-show="PostSrv.isAdmin">
+            <div class="control-wrapper">
+                <i class="icon-save" ng-class="PostSrv.isSavedClass()"></i>
+            </div>
+        </div>
         <div class="post-wrapper">
             <dp-markdown my-attr="post.text"></dp-markdown>
             <footer class="post-content">
