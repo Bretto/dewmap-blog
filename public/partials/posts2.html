@@ -1,0 +1,11 @@
+<div id="post-list" ng-controller="PostsCtrl">
+    <ul>
+        <li ng-repeat="post in posts">
+            <a ng-click="PostSrv.onRead(post._id)">
+                <time><strong>{{post.date | date:'MMM d'}}</strong><br>{{post.date | date:'yyyy'}}</time>
+                <div class="shine"></div>
+                <h1>{{post.title}}</h1>
+            </a>
+        </li>
+    </ul>
+</div>

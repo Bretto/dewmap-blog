@@ -1,0 +1,143 @@
+
+@import "compass/reset";
+@import "compass/css3";
+@import "compass/utilities";
+
+$c1 : #8D000A;
+$c2 : #C21F00;
+$c3 : #D96F1F;
+$c4 : #A3742A;
+$c5 : #736126;
+$c6 : #0099D2;
+
+$border-color: #E6E6E6;
+$para-color: #555;
+$gap: 30px;
+$nav-width: 330px;
+$content-width: 950px;
+$box-size: 85px;
+
+@font-face {
+  font-family: 'Lato';
+  font-style: normal;
+  font-weight: 700;
+  src: local('Lato Bold'), local('Lato-Bold'), url('http://themes.googleusercontent.com/static/fonts/lato/v6/qdgUG4U09HnJwhYI-uK18wLUuEpTyoUstqEm5AMlJo4.woff') format('woff');
+}
+@font-face {
+  font-family: 'Lato';
+  font-style: normal;
+  font-weight: 300;
+  src: local('Lato Light'), local('Lato-Light'), url('http://themes.googleusercontent.com/static/fonts/lato/v6/kcf5uOXucLcbFOydGU24WALUuEpTyoUstqEm5AMlJo4.woff') format('woff');
+}
+
+@mixin nav-hover-color($color){
+  i {
+    background-color: $color;
+  }
+
+  &:hover {
+    background-color: $color;
+    a, h1 {
+      color: #ffffff;
+    }
+  }
+}
+
+@mixin shine{
+  top: 5px;
+  width: $box-size - 10px;
+  position: absolute;
+  background: rgba(white, .3);
+  height: 30px;
+  @include border-bottom-radius(30px);
+}
+
+@mixin post-title{
+  color: #000000;
+  padding-left: 20px;
+  padding-top: 25px;
+  text-transform: uppercase;
+  font-size: 33px;
+  font-weight: bold;
+  padding-left: $gap;
+  white-space: nowrap;
+}
+
+@mixin post-time{
+  text-transform: uppercase;
+  font-size: 14px;
+  line-height: 17px;
+  padding-top: 25px;
+  text-align: center;
+  color: white;
+  background-color: #000000;
+  position: absolute;
+  right: 0;
+  top: 0;
+  width: $box-size;
+  height: $box-size;
+  strong {
+    font-weight: bold;
+  }
+}
+
+@mixin icon{
+  padding-top: 25px;
+  width: $box-size;
+  height: $box-size;
+  position: absolute;
+  top: 0;
+  left: 0;
+  font-size: 40px;
+  color: #ffffff;
+}
+
+@mixin post-title-wrap{
+  overflow: hidden;
+  height: $box-size;
+  position: relative;
+  border-bottom: solid 1px $border-color;
+}
+
+
+blockquote {
+  font-size: 18px;
+  border-color: $c1 !important;
+  border-left: 10px solid;
+  padding-left: 20px;
+  display: inline-block;
+  padding-bottom: 0;
+  margin-left: 0;
+  margin-top: 5px;
+  margin-bottom: 10px;
+  p {
+    margin-bottom: 10px !important;
+  }
+}
+
+jl-markdown {
+  display: block;
+}
+
+.control-wrap{
+  float: right;
+  line-height: $box-size;
+  text-align: center;
+  height: $box-size;
+  width: $box-size;
+  @include border-radius(85px);
+  border: solid $border-color 5px;
+  &:hover {
+    border-color: $c6;
+    background: $c6;
+    i {
+      color: #ffffff;
+    }
+  }
+
+  div{
+    margin-top: -4px;
+    font-size: 40px;
+    color: $border-color;
+  }
+}

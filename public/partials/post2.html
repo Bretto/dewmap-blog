@@ -1,0 +1,19 @@
+<section id="post">
+    <article>
+        <header>
+            <time><strong>{{post.date | date:'MMM d'}}</strong><br>{{post.date | date:'yyyy'}}</time>
+            <div class="shine"></div>
+            <h1>{{post.title}}</h1>
+        </header>
+        <a ng-show="PostSrv.isAdmin" ng-click="PostSrv.onEdit(post._id)">
+            <div class="control-wrap">
+                <div>
+                    <i class="icon-pencil"></i>
+                </div>
+            </div>
+        </a>
+        <div class="post-content">
+            <dp-markdown my-attr="post.text"></dp-markdown>
+        </div>
+    </article>
+</section>

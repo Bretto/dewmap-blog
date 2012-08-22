@@ -81,6 +81,58 @@ article, aside, details, figcaption, figure, footer, header, hgroup, menu, nav, 
   src: local("Lato Light"), local("Lato-Light"), url("http://themes.googleusercontent.com/static/fonts/lato/v6/kcf5uOXucLcbFOydGU24WALUuEpTyoUstqEm5AMlJo4.woff") format("woff");
 }
 
+/* line 103, ../sass/base.scss */
+blockquote {
+  font-size: 18px;
+  border-color: #8d000a !important;
+  border-left: 10px solid;
+  padding-left: 20px;
+  display: inline-block;
+  padding-bottom: 0;
+  margin-left: 0;
+  margin-top: 5px;
+  margin-bottom: 10px;
+}
+/* line 113, ../sass/base.scss */
+blockquote p {
+  margin-bottom: 10px !important;
+}
+
+/* line 118, ../sass/base.scss */
+jl-markdown {
+  display: block;
+}
+
+/* line 122, ../sass/base.scss */
+.control-wrap {
+  float: right;
+  line-height: 85px;
+  text-align: center;
+  height: 85px;
+  width: 85px;
+  -webkit-border-radius: 85px;
+  -moz-border-radius: 85px;
+  -ms-border-radius: 85px;
+  -o-border-radius: 85px;
+  border-radius: 85px;
+  border: solid #e6e6e6 5px;
+}
+/* line 130, ../sass/base.scss */
+.control-wrap:hover {
+  border-color: #0099d2;
+  background: #0099d2;
+}
+/* line 133, ../sass/base.scss */
+.control-wrap:hover i {
+  color: #ffffff;
+}
+/* line 138, ../sass/base.scss */
+.control-wrap div {
+  margin-top: -4px;
+  font-size: 40px;
+  color: #e6e6e6;
+}
+
 /* line 8, ../sass/screen.scss */
 * {
   -webkit-box-sizing: border-box;
@@ -469,14 +521,14 @@ blockquote p {
   margin-bottom: 10px !important;
 }
 
-/* line 370, ../sass/screen.scss */
+/* line 369, ../sass/screen.scss */
 .centered-text-wrapper {
   width: 85px;
   height: 85px;
   display: table;
 }
 
-/* line 376, ../sass/screen.scss */
+/* line 375, ../sass/screen.scss */
 .centered-img-wrapper {
   width: 85px;
   height: 85px;
@@ -484,26 +536,26 @@ blockquote p {
   text-align: center;
 }
 
-/* line 383, ../sass/screen.scss */
+/* line 382, ../sass/screen.scss */
 .is-centered-img {
   margin: auto;
   vertical-align: middle;
   text-align: center;
 }
 
-/* line 389, ../sass/screen.scss */
+/* line 388, ../sass/screen.scss */
 .is-centered-text {
   display: table-cell;
   vertical-align: middle;
   text-align: center;
 }
 
-/* line 395, ../sass/screen.scss */
+/* line 394, ../sass/screen.scss */
 .is-not-admin {
   display: none;
 }
 
-/* line 399, ../sass/screen.scss */
+/* line 398, ../sass/screen.scss */
 .is-saved {
   color: rgba(230, 230, 230, 0.2);
   border-color: rgba(230, 230, 230, 0.2);
