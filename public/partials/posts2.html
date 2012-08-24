@@ -1,11 +1,28 @@
 <div id="post-list" ng-controller="PostsCtrl">
+    <div class="float-warp" ng-show="PostSrv.isAdmin">
+    <a ng-click="PostSrv.onNew()">
+        <div class="control-wrap">
+            <div>
+                <i class="icon-plus"></i>
+            </div>
+        </div>
+    </a>
+    </div>
     <ul>
         <li ng-repeat="post in posts">
+            <a ng-click="PostSrv.onDestroy(post)" ng-show="PostSrv.isAdmin">
+                <div class="control-wrap-left">
+                    <div>
+                        <i class="icon-trash"></i>
+                    </div>
+                </div>
+            </a>
             <a ng-click="PostSrv.onRead(post._id)">
+                <span><h1>{{post.title}}</h1></span>
                 <time><strong>{{post.date | date:'MMM d'}}</strong><br>{{post.date | date:'yyyy'}}</time>
                 <div class="shine"></div>
-                <h1>{{post.title}}</h1>
             </a>
         </li>
+
     </ul>
 </div>

@@ -12,17 +12,16 @@ PostsCtrl.$inject = ['$scope', '$location', 'PostRes', 'PostSrv'];
 function PostCtrl($scope , $log, $location, $routeParams, PostSrv, PostRes){
     $log.info('PostCtrl');
     $scope.PostSrv = PostSrv;
-    $scope.post = PostSrv.getPost($routeParams.postId);
 
-    $scope.isClean = function() {
-        if(angular.equals(PostSrv.originalPost, $scope.post)){
-            PostSrv.isSaved = true;
-        }else{
-            PostSrv.isSaved = false;
-        }
+    if($routeParams.postId === "preview"){
+        $scope.post = PostSrv.editPost;
     }
-
+    else{
+        $scope.post = PostSrv.getPost($routeParams.postId);
+    }
 }
+
+
 PostCtrl.$inject = ['$scope', '$log', '$location', '$routeParams', 'PostSrv', 'PostRes'];
 
 
@@ -30,7 +29,16 @@ function EditPostCtrl($scope , $log, $routeParams, PostSrv, PostRes){
     $log.info('EditPostCtrl');
     $scope.PostSrv = PostSrv;
 
-    $scope.post = PostSrv.getPost($routeParams.postId);
+    // if there is an edited post &
+    // the editPost is the post we are interested in or
+    // it is a new post that we are previewing
+
+    if(PostSrv.editPost && ( PostSrv.editPost._id === $routeParams.postId || PostSrv.editPost._id === undefined ))
+    {
+        $scope.post = PostSrv.editPost;
+    }else{
+        $scope.post = PostSrv.getPost($routeParams.postId);
+    }
 
     $scope.isClean = function() {
         if(angular.equals(PostSrv.originalPost, $scope.post)){
@@ -39,7 +47,6 @@ function EditPostCtrl($scope , $log, $routeParams, PostSrv, PostRes){
             PostSrv.isSaved = false;
         }
     }
-
 
 //       $scope.$watch(function(){return $scope.post }, function(newValue) {
 //       //console.log(newValue);

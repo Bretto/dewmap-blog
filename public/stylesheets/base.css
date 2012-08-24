@@ -87,7 +87,7 @@ blockquote {
   padding-bottom: 0;
   margin-left: 0;
   margin-top: 5px;
-  margin-bottom: 10px;
+  margin-bottom: 50px;
 }
 /* line 113, ../sass/base.scss */
 blockquote p {
@@ -100,8 +100,16 @@ jl-markdown {
 }
 
 /* line 122, ../sass/base.scss */
+.float-warp {
+  height: 85px;
+  overflow: overlay;
+  border-bottom: solid 1px #e6e6e6;
+}
+
+/* line 129, ../sass/base.scss */
 .control-wrap {
   float: right;
+  clear: both;
   line-height: 85px;
   text-align: center;
   height: 85px;
@@ -112,19 +120,20 @@ jl-markdown {
   -o-border-radius: 85px;
   border-radius: 85px;
   border: solid #e6e6e6 5px;
+  color: #e6e6e6;
 }
-/* line 130, ../sass/base.scss */
+/* line 139, ../sass/base.scss */
 .control-wrap:hover {
   border-color: #0099d2;
   background: #0099d2;
 }
-/* line 133, ../sass/base.scss */
+/* line 142, ../sass/base.scss */
 .control-wrap:hover i {
   color: #ffffff;
 }
-/* line 138, ../sass/base.scss */
+/* line 147, ../sass/base.scss */
 .control-wrap div {
   margin-top: -4px;
   font-size: 40px;
-  color: #e6e6e6;
+  color: #e6e6e6 !important;
 }

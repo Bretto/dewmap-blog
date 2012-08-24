@@ -1,6 +1,6 @@
 <ul ng-controller="NavCtrl">
     <li id="nav-logo">
-        <a>
+        <a ng-click="PostSrv.onQuery()">
             <i class="icon-logo"></i>
 
             <div class="shine"></div>
@@ -8,7 +8,7 @@
         </a>
     </li>
     <li id="nav-posts">
-        <a>
+        <a ng-click="PostSrv.onQuery()">
             <i class="icon-folder-open"></i>
 
             <div class="shine"></div>
@@ -16,7 +16,7 @@
         </a>
     </li>
     <li id="nav-about">
-        <a>
+        <a ng-click="onAbout()">
             <i class="icon-book"></i>
 
             <div class="shine"></div>
@@ -24,7 +24,7 @@
         </a>
     </li>
     <li id="nav-contact">
-        <a>
+        <a ng-click="onContact()">
             <i class="icon-envelope-alt"></i>
 
             <div class="shine"></div>
@@ -32,7 +32,7 @@
         </a>
     </li>
     <li id="nav-github">
-        <a>
+        <a ng-click="onGitHub()">
             <i class="icon-github"></i>
 
             <div class="shine"></div>
@@ -40,7 +40,7 @@
         </a>
     </li>
     <li id="nav-twitter">
-        <a>
+        <a ng-click="onTwitter()">
             <i class="icon-twitter"></i>
 
             <div class="shine"></div>

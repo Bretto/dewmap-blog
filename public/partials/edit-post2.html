@@ -6,7 +6,7 @@
         <input ng-model="post.title"/>
     </header>
 
-    <a ng-click="PostSrv.onRead(post._id)">
+    <a ng-click="PostSrv.onPreview(post)">
         <div class="control-wrap">
             <div>
                 <i class="icon-eye-open"></i>
@@ -38,20 +38,6 @@
 
     <div class="post-content">
         <textarea class="post-input" ng-model="post.text"/>
-        <footer class="post-content">
-            <nav>
-                <div class="is-float-left centered-img-wrapper is-control">
-                    <div class="control-wrapper">
-                        <i class="icon-arrow-left"></i>
-                    </div>
-                </div>
-                <div class="is-float-right centered-img-wrapper is-control">
-                    <div class="control-wrapper">
-                        <i class="icon-arrow-right"></i>
-                    </div>
-                </div>
-            </nav>
-        </footer>
     </div>
 
 </article>

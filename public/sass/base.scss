@@ -109,7 +109,7 @@ blockquote {
   padding-bottom: 0;
   margin-left: 0;
   margin-top: 5px;
-  margin-bottom: 10px;
+  margin-bottom: 50px;
   p {
     margin-bottom: 10px !important;
   }
@@ -119,14 +119,23 @@ jl-markdown {
   display: block;
 }
 
+.float-warp{
+  height: 85px;
+  overflow: overlay;
+  border-bottom: solid 1px $border-color;
+}
+
+
 .control-wrap{
   float: right;
+  clear: both;
   line-height: $box-size;
   text-align: center;
   height: $box-size;
   width: $box-size;
   @include border-radius(85px);
   border: solid $border-color 5px;
+  color: $border-color;
   &:hover {
     border-color: $c6;
     background: $c6;
@@ -138,6 +147,6 @@ jl-markdown {
   div{
     margin-top: -4px;
     font-size: 40px;
-    color: $border-color;
+    color: $border-color !important;
   }
 }

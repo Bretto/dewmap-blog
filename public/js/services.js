@@ -82,10 +82,9 @@ services.factory('PostSrv', function( $routeParams, PostRes, $location, HttpCach
 
     var PostSrv = {
 
-        originalPost: null,
+        origPost: null,
+        editPost: null,
         cache: HttpCache,
-        endPointPrefix: endPointPrefix,
-
         isAdmin: false,
 
         onAdmin: function(){
@@ -104,6 +103,11 @@ services.factory('PostSrv', function( $routeParams, PostRes, $location, HttpCach
 
         onRead: function(id){
             $location.path("post/"+ id);
+        },
+
+        onPreview: function(post){
+            PostSrv.editPost = post;
+            $location.path("post/preview");
         },
 
         onEdit: function(id){
@@ -126,14 +130,17 @@ services.factory('PostSrv', function( $routeParams, PostRes, $location, HttpCach
         },
 
         onSave: function(post){
+
+            // delete the cached post listing as a
+            // post was updated or created
+            deleteCachedPost(); // the 'post' is implied
+
             if(post._id == undefined){
-                deleteCachedPost();
                 PostRes.save(post, function(post) {
                     PostSrv.originalPost = new PostRes(post);
                     $location.path('post/' + post._id + '/edit');
                 });
             }else{
-                deleteCachedPost();
                 deleteCachedPost(post._id);
                 post.update(function(post) {
                     PostSrv.originalPost = new PostRes(post);

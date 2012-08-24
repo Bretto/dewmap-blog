@@ -91,7 +91,7 @@ blockquote {
   padding-bottom: 0;
   margin-left: 0;
   margin-top: 5px;
-  margin-bottom: 10px;
+  margin-bottom: 50px;
 }
 /* line 113, ../sass/base.scss */
 blockquote p {
@@ -104,8 +104,16 @@ jl-markdown {
 }
 
 /* line 122, ../sass/base.scss */
+.float-warp {
+  height: 85px;
+  overflow: overlay;
+  border-bottom: solid 1px #e6e6e6;
+}
+
+/* line 129, ../sass/base.scss */
 .control-wrap {
   float: right;
+  clear: both;
   line-height: 85px;
   text-align: center;
   height: 85px;
@@ -116,21 +124,22 @@ jl-markdown {
   -o-border-radius: 85px;
   border-radius: 85px;
   border: solid #e6e6e6 5px;
+  color: #e6e6e6;
 }
-/* line 130, ../sass/base.scss */
+/* line 139, ../sass/base.scss */
 .control-wrap:hover {
   border-color: #0099d2;
   background: #0099d2;
 }
-/* line 133, ../sass/base.scss */
+/* line 142, ../sass/base.scss */
 .control-wrap:hover i {
   color: #ffffff;
 }
-/* line 138, ../sass/base.scss */
+/* line 147, ../sass/base.scss */
 .control-wrap div {
   margin-top: -4px;
   font-size: 40px;
-  color: #e6e6e6;
+  color: #e6e6e6 !important;
 }
 
 /* line 8, ../sass/screen2.scss */
@@ -345,6 +354,11 @@ html a, body a {
   color: #ffffff;
 }
 /* line 144, ../sass/screen2.scss */
+#post-list li a {
+  width: 100%;
+  height: 100%;
+}
+/* line 150, ../sass/screen2.scss */
 #post-list li h1 {
   color: #000000;
   padding-left: 20px;
@@ -355,7 +369,7 @@ html a, body a {
   padding-left: 30px;
   white-space: nowrap;
 }
-/* line 148, ../sass/screen2.scss */
+/* line 154, ../sass/screen2.scss */
 #post-list li time {
   text-transform: uppercase;
   font-size: 14px;
@@ -374,7 +388,7 @@ html a, body a {
 #post-list li time strong {
   font-weight: bold;
 }
-/* line 152, ../sass/screen2.scss */
+/* line 158, ../sass/screen2.scss */
 #post-list li .shine {
   right: 5px;
   top: 5px;
@@ -390,14 +404,39 @@ html a, body a {
   border-bottom-right-radius: 30px;
 }
 
-/* line 164, ../sass/screen2.scss */
+/* line 174, ../sass/screen2.scss */
 #post article header {
   overflow: hidden;
   height: 85px;
   position: relative;
   border-bottom: solid 1px #e6e6e6;
 }
-/* line 167, ../sass/screen2.scss */
+/* line 177, ../sass/screen2.scss */
+#post article header input {
+  color: #000000;
+  padding-left: 20px;
+  padding-top: 25px;
+  text-transform: uppercase;
+  font-size: 33px;
+  font-weight: bold;
+  padding-left: 30px;
+  white-space: nowrap;
+  border: 0px solid;
+  padding: 0;
+  margin: 0;
+  width: 100%;
+  padding-right: 100px;
+  padding-top: 18px;
+  vertical-align: middle;
+  text-align: -webkit-auto;
+  padding-left: 25px;
+  padding-bottom: 20px;
+}
+/* line 190, ../sass/screen2.scss */
+#post article header input:focus {
+  outline: none;
+}
+/* line 197, ../sass/screen2.scss */
 #post article header h1 {
   color: #000000;
   padding-left: 20px;
@@ -408,7 +447,7 @@ html a, body a {
   padding-left: 30px;
   white-space: nowrap;
 }
-/* line 171, ../sass/screen2.scss */
+/* line 201, ../sass/screen2.scss */
 #post article header time {
   text-transform: uppercase;
   font-size: 14px;
@@ -427,7 +466,7 @@ html a, body a {
 #post article header time strong {
   font-weight: bold;
 }
-/* line 175, ../sass/screen2.scss */
+/* line 205, ../sass/screen2.scss */
 #post article header .shine {
   right: 5px;
   top: 5px;
@@ -442,23 +481,35 @@ html a, body a {
   -webkit-border-bottom-right-radius: 30px;
   border-bottom-right-radius: 30px;
 }
-/* line 181, ../sass/screen2.scss */
+/* line 211, ../sass/screen2.scss */
 #post article .post-content {
   padding: 30px;
   padding-right: 115px;
   max-width: 950px;
 }
-/* line 186, ../sass/screen2.scss */
+/* line 217, ../sass/screen2.scss */
+#post article .post-content textarea {
+  width: 100%;
+  height: 700px;
+  border: 0px solid;
+  font-size: 16px;
+  color: #555555;
+}
+/* line 224, ../sass/screen2.scss */
+#post article .post-content textarea:focus {
+  outline: none;
+}
+/* line 230, ../sass/screen2.scss */
 #post article .post-content p {
-  margin-bottom: 30px;
+  margin-bottom: 50px;
   text-align: justify;
 }
-/* line 191, ../sass/screen2.scss */
+/* line 235, ../sass/screen2.scss */
 #post article .post-content strong {
   color: #000000;
   font-weight: bold;
 }
-/* line 196, ../sass/screen2.scss */
+/* line 240, ../sass/screen2.scss */
 #post article .post-content h1 {
   color: #000000;
   font-size: 28px;
@@ -466,7 +517,7 @@ html a, body a {
   font-weight: 700;
   margin-bottom: 30px;
 }
-/* line 204, ../sass/screen2.scss */
+/* line 248, ../sass/screen2.scss */
 #post article .post-content h2 {
   color: #000000;
   font-size: 24px;
@@ -475,7 +526,7 @@ html a, body a {
   margin-bottom: 30px;
 }
 
-/* line 218, ../sass/screen2.scss */
+/* line 262, ../sass/screen2.scss */
 .title-input-wrapper {
   max-width: 950px;
   line-height: 85px;
@@ -483,14 +534,14 @@ html a, body a {
   padding-right: 115px;
 }
 
-/* line 225, ../sass/screen2.scss */
+/* line 269, ../sass/screen2.scss */
 .date-input-wrapper {
   padding: 20px 5px;
   width: 85px;
   height: 85px;
 }
 
-/* line 231, ../sass/screen2.scss */
+/* line 275, ../sass/screen2.scss */
 .date-input {
   width: 100%;
   line-height: 17px;
@@ -500,20 +551,52 @@ html a, body a {
   resize: none;
 }
 
-/* line 241, ../sass/screen2.scss */
+/* line 285, ../sass/screen2.scss */
 .title-input {
   width: 100%;
   padding-left: 0;
   vertical-align: middle;
 }
 
-/* line 248, ../sass/screen2.scss */
+/* line 292, ../sass/screen2.scss */
 .is-not-admin {
   display: none;
 }
 
-/* line 252, ../sass/screen2.scss */
+/* line 296, ../sass/screen2.scss */
 .is-saved {
   color: rgba(230, 230, 230, 0.2);
   border-color: rgba(230, 230, 230, 0.2);
+}
+
+/* line 301, ../sass/screen2.scss */
+.control-wrap-left {
+  float: left;
+  clear: both;
+  line-height: 85px;
+  text-align: center;
+  height: 85px;
+  width: 85px;
+  -webkit-border-radius: 85px;
+  -moz-border-radius: 85px;
+  -ms-border-radius: 85px;
+  -o-border-radius: 85px;
+  border-radius: 85px;
+  border: solid #e6e6e6 5px;
+  color: #e6e6e6;
+}
+/* line 311, ../sass/screen2.scss */
+.control-wrap-left:hover {
+  border-color: #0099d2;
+  background: #0099d2;
+}
+/* line 314, ../sass/screen2.scss */
+.control-wrap-left:hover i {
+  color: #ffffff;
+}
+/* line 319, ../sass/screen2.scss */
+.control-wrap-left div {
+  margin-top: -4px;
+  font-size: 40px;
+  color: #e6e6e6 !important;
 }
