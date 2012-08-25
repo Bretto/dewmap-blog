@@ -88,6 +88,7 @@ services.factory('PostSrv', function( $routeParams, PostRes, $location, HttpCach
         isAdmin: false,
 
         onAdmin: function(){
+            //$location.path("/login");
             PostSrv.isAdmin = (PostSrv.isAdmin) ? false : true;
         },
 
@@ -140,6 +141,7 @@ services.factory('PostSrv', function( $routeParams, PostRes, $location, HttpCach
                     PostSrv.originalPost = new PostRes(post);
                     $location.path('post/' + post._id + '/edit');
                 });
+
             }else{
                 deleteCachedPost(post._id);
                 post.update(function(post) {

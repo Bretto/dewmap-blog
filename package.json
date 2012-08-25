@@ -3,6 +3,7 @@
     "version": "0.0.1",
     "dependencies": {
         "express": "2.5.x",
+        "ejs": "*",
         "mongodb": "1.0.X"
     },
     "engines": {
