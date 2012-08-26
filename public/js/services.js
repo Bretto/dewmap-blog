@@ -1,79 +1,31 @@
 'use strict';
 
 
-
-
-
-var services = angular.module('myApp.services', ['ngResource']);
+var services = angular.module('myApp.services', []);
 
 services.constant('endPointPrefix', '/api/post');
 
 
-services.factory('HttpCache',function($cacheFactory)
-{
+services.factory('HttpCache', function ($cacheFactory) {
     //To get the Resource to cache response
     return $cacheFactory('HttpCacheName');
 });
 
 
-services.factory('PostRes', function($resource, $location, HttpCache, endPointPrefix) {
+services.factory('PostSrv', function ($http, $log, $rootScope, $routeParams, $location, HttpCache, endPointPrefix) {
 
-    var url,
-        PostRes;
-
-    if($location.host() === 'localhost'){
-        url = $location.protocol() + '://' + $location.host() + '::PORT' + endPointPrefix + '/:id';
-        PostRes = $resource(url,
-            { id: '@_id', PORT:'5000' }, {
-                get: {
-                    method:"GET",
-                    cache:HttpCache  /*using our injected cache-factory */
-                },
-                query: {
-                    method:"GET",
-                    isArray:true,
-                    cache:HttpCache  /*using our injected cache-factory */
-                },
-                update: { method: 'PUT' }
-            }
-        );
-    }else{
-        url = 'http://cold-dusk-1881.herokuapp.com' + endPointPrefix + '/:id';
-        PostRes = $resource(url,
-            { id: '@_id'}, {
-                update: { method: 'PUT' }
-            }
-        );
-    }
-
-    PostRes.prototype.update = function(cb) {
-            return PostRes.update({id: this._id},
-                angular.extend({}, this, {_id:undefined}), cb);
-        };
-
-    PostRes.prototype.destroy = function(cb) {
-            return PostRes.remove({id: this._id}, cb);
-        };
-
-    return PostRes;
-});
-
-
-
-services.factory('PostSrv', function( $routeParams, PostRes, $location, HttpCache, endPointPrefix ) {
-
-    function deleteCachedPost(id){
+    function deleteCachedPost(id) {
         var cacheKey = getCacheKey(id);
-        if(HttpCache.get(cacheKey)){
+        if (HttpCache.get(cacheKey)) {
             PostSrv.cache.remove(cacheKey);
         }
     }
 
-    function getCacheKey(id){
-        var PORT = ( $location.port() === null )? '' : ':' + $location.port() ;
+    function getCacheKey(id) {
+        var PORT = ( $location.port() === null ) ? '' : ':' + $location.port();
         var KEY = $location.protocol() + '://' + $location.host() + PORT + endPointPrefix;
 
-        if(id !== undefined){
+        if (id !== undefined) {
             KEY += '/' + id;
         }
         return KEY;
@@ -82,85 +34,130 @@ services.factory('PostSrv', function( $routeParams, PostRes, $location, HttpCach
 
     var PostSrv = {
 
-        origPost: null,
-        editPost: null,
-        cache: HttpCache,
-        isAdmin: false,
+        origPost:null,
+        editPost:null,
+        cache:HttpCache,
+        isAdmin:false,
 
-        onAdmin: function(){
-            //$location.path("/login");
-            PostSrv.isAdmin = (PostSrv.isAdmin) ? false : true;
+        onAdmin:function () {
+
+            if(PostSrv.isAdmin){
+                $http.get('/logout').
+                    success(function (data) {
+                        $log.info('Logged out !');
+                    });
+                PostSrv.isAdmin = false;
+            }else{
+                $location.path("login");
+            }
         },
 
-        isSaved: true,
+        isSaved:true,
 
-        isSavedClass: function(){
-          if(PostSrv.isSaved) return 'is-saved';
+        isSavedClass:function () {
+            if (PostSrv.isSaved) return 'is-saved';
         },
 
-        onQuery: function(){
-            $location.path("post/");
+        onQuery:function () {
+            $location.path("post");
         },
 
-        onRead: function(id){
-            $location.path("post/"+ id);
+        onRead:function (id) {
+            $location.path("post/" + id);
         },
 
-        onPreview: function(post){
+        onPreview:function (post) {
             PostSrv.editPost = post;
             $location.path("post/preview");
         },
 
-        onEdit: function(id){
-            $location.path("post/"+ id +"/edit");
+        onEdit:function (id) {
+            $location.path("post/" + id + "/edit");
         },
 
-        onCancel: function(id){
-            $location.path("post/"+ id);
+        onCancel:function (id) {
+            $location.path("post/" + id);
         },
 
-        onNew: function(){
+        onNew:function () {
             $location.path("post/new");
         },
 
-        onDestroy: function(post){
+        onDestroy:function (post) {
             deleteCachedPost();
-            post.destroy(function() {
-                $location.path('post/');
-            });
+
+            $http.delete('/api/post/' + post._id).
+                success(function (data) {
+                    $location.path('post/');
+                }).
+                error(function (data, status, headers, config) {
+                    $log.info('Delete Error');
+                    $rootScope.$broadcast('error',{status:status, data:data});
+                });
         },
 
-        onSave: function(post){
+        onSave:function (post) {
 
             // delete the cached post listing as a
             // post was updated or created
             deleteCachedPost(); // the 'post' is implied
 
-            if(post._id == undefined){
-                PostRes.save(post, function(post) {
-                    PostSrv.originalPost = new PostRes(post);
-                    $location.path('post/' + post._id + '/edit');
-                });
+            if (post._id == undefined) {
 
-            }else{
+                $http.post('/api/post', post).
+                    success(function (data) {
+                        $log.info('Create Success');
+                        PostSrv.originalPost = data;
+                        $location.path('post/' + data._id + '/edit');
+                    }).
+                    error(function (data, status, headers, config) {
+                        $log.info('Create Error');
+                        $rootScope.$broadcast('error',{status:status, data:data});
+                    });
+
+            } else {
                 deleteCachedPost(post._id);
-                post.update(function(post) {
-                    PostSrv.originalPost = new PostRes(post);
-                });
+
+                $http.put('/api/post/' + post._id, angular.extend({}, post, {_id:undefined})).
+                    success(function (data) {
+                        $log.info('Save Success');
+                        PostSrv.originalPost = data;
+                    }).
+                    error(function (data, status, headers, config) {
+                        $log.info('Save Error');
+                        $rootScope.$broadcast('error',{status:status, data:data});
+                    });
             }
         },
 
-        getPost: function(id){
-            return PostRes.get({id: id}, function(post) {
-                PostSrv.originalPost = new PostRes(post);
-            });
+        getPost:function (id, $scope) {
+
+            $http.get('/api/post/' + id).
+                success(function (data) {
+                    PostSrv.originalPost = data;
+                    $scope.post = data;
+                });
         },
 
-        getPosts: function(){
-            return PostRes.query();
+        getPosts:function ($scope) {
+            $http.get('/api/post').
+                success(function (data, status, headers, config) {
+                    $scope.posts = data;
+                });
         }
 
     }
+
+    $http.get('/api/isLoggedId').
+        success(function (data) {
+            if(data === 'admin'){
+                $log.info('you are logged-in');
+                PostSrv.isAdmin = true;
+            }else{
+                $log.info('you are not logged-in');
+                PostSrv.isAdmin = false;
+            }
+        });
 
     return PostSrv;
 });

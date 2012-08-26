@@ -57,8 +57,9 @@ app.configure(function () {
     });
 
     //app.use(allowCrossDomain);
-    app.use(app.router);
     app.use(express.static(__dirname + '/public'));
+    app.use(app.router);
+
 
 });
 
@@ -109,13 +110,14 @@ function authenticate(name, pass, fn) {
 }
 
 function restrict(req, res, next) {
-    if (req.session.user) {
+    if (req.session && req.session.user) {
         next();
     } else {
         req.session.error = 'Access denied!';
-        res.redirect('/login');
+        res.send(401);
     }
 }
+
 
 app.get('/restricted', restrict, function(req, res){
     res.send('Wahoo! restricted area');
@@ -135,6 +137,7 @@ app.get('/login', function(req, res){
         res.locals.message = req.session.success;
     }
     res.send({message:res.locals.message});
+    //res.send( 401, {message:res.locals.message});
 });
 
 app.post('/login', function(req, res){
@@ -146,6 +149,7 @@ app.post('/login', function(req, res){
                 // Store the user's primary key
                 // in the session store to be retrieved,
                 // or in this case the entire user object
+
                 req.session.user = user;
                 res.redirect('/login');
             });
@@ -161,9 +165,12 @@ app.post('/login', function(req, res){
 
 
 app.get('/', routes.index);
+app.get('/post', routes.index);
 app.get('/partials/:name', routes.partials);
 
 // JSON API
+
+app.get('/api/isLoggedId', api.isLoggedIn);
 
 //Query
 app.get('/api/:collection', api.posts);
@@ -172,16 +179,15 @@ app.get('/api/:collection', api.posts);
 app.get('/api/:collection/:id', api.post);
 
 //Create
-app.post('/api/:collection', api.createPost);
+app.post('/api/:collection', restrict, api.createPost);
 
 //Update
-app.put('/api/:collection/:id', api.updatePost);
+app.put('/api/:collection/:id', restrict, api.updatePost);
 
 //Delete
-app.del('/api/:collection/:id', api.deletePost);
+app.del('/api/:collection/:id', restrict, api.deletePost);
 
-
-
+//app.get('*', routes.index);
 
 app.listen(port, function() {
     console.log("Listening on " + port);

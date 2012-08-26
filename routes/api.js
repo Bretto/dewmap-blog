@@ -37,6 +37,18 @@ var fn = function (req, res) {
 };
 
 
+exports.isLoggedIn = function(req, res) {
+    console.log("isLoggedIn");
+
+    if (req.session && req.session.user) {
+        res.send('admin');
+    }
+    else
+    {
+        res.send('user');
+    }
+};
+
 //Get
 exports.posts = function(req, res) {
     db.collection(req.params.collection).find({}).toArray(fn(req, res));
@@ -54,7 +66,6 @@ exports.createPost = function(req, res) {
 
 //Update
 exports.updatePost = function(req, res) {
-    //db.collection(req.params.collection).update({_id: ObjectID(req.params.id)}, req.body, {safe:true, new:true}, fn(req, res));
     db.collection(req.params.collection).findAndModify({_id: ObjectID(req.params.id)}, [], req.body, {new:true, upsert:true, safe:true}, fn(req, res));
 };
 
