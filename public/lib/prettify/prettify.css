@@ -2,9 +2,9 @@
 .lit { color: #195f91; }
 .pun, .opn, .clo { color: #93a1a1; }
 .fun { color: #dc322f; }
-.str, .atv { color: #D14; }
+.str, .atv { color: #0099D2; }
 .kwd, .linenums .tag { color: #1e347b; }
-.typ, .atn, .dec, .var { color: teal; }
+.typ, .atn, .dec, .var { color: #207b69; }
 .pln { color: #48484c; }
 
 .prettyprint {
@@ -14,6 +14,8 @@
   background-color: #f7f7f9;
   border: 1px solid #e1e1e8;
   font-family: 'verdana';
+  font-size: 14px;
+  line-height: 18px;
 }
 .prettyprint.linenums {
   -webkit-box-shadow: inset 40px 0 0 #fbfbfc, inset 41px 0 0 #ececf0;
@@ -40,3 +42,65 @@ ol.linenums li {
     /*display: none;*/
 /*}*/
 
+
+/*#The EventBus*/
+
+/*Basically the EventBus pattern is just in a Singleton Object you share across your app, that lets you publish and subscribe to events. It enables you to share states, events, data etc.. across Objects that have no reference to each other. It's an elegant and decoupled way to communicates in-between Objects.*/
+
+/*>"This pattern in extremely useful in the building of applications, it let's you orchestrate the events of your app in a simple & efficient way."*/
+
+
+/*##A War Game*/
+
+/*Let's say that we are building a war game, at some point in the game all the units ( tanks, planes, ships, soldiers etc... ) needs to be alerted if an important event happens ( like: "The base is under attack !" kind of event ) .*/
+/*With the EventBus pattern,  all units share a reference to the EventBus enabling them to "listent" or "subscribe", to the **"BASE UNDER ATTACK"** event that initiates a  "QuickReturnToBase" commande. Not only all units are alerted instantaneously, but every units can also "send" or "publish"  a  **"BASE UNDER ATTACK"** event, witch would be very handy in a war game.*/
+
+/*###The War Unit */
+/*```*/
+/*(function($,W,D,EventBus){*/
+
+/*W.WAR_UNITS.Tanks = {*/
+
+/*init: function(){*/
+    /*EventBus.subscribe('BASE_UNDER_ATTACK', this.quickReturnToBase);*/
+/*},*/
+
+/*alertUnitsBaseUnderAttack: function(){*/
+    /*EventBus.dispatch('BASE_UNDER_ATTACK');*/
+/*},*/
+
+/*quickReturnToBase: function(){},*/
+/*seachAndDestroy: function(){}*/
+
+    /*}*/
+    /*})(jQuery, window, document, EventBus)*/
+/*```*/
+
+/*That's it with this simple pattern in mind you can wire you application in a decoupled way that will enable a flexible architecture. Lots of frameworks implements the EventBus pattern out of the box. Angularjs provides the $broadcast dependency to wire your application. You request the $broadcast dependency, and then you broadcast events on a scope, preferably the $rootScope if you want all the Objects to be notified, and then you just listen through the $scope.$on('eventName') commande.*/
+
+/***AngularJS  (psedo Code)***/
+/*```*/
+/*function onSave(post) {*/
+/*$http.put('/api/post/' + post._id, angular.extend({}, post, {_id:undefined})).*/
+/*success(function (data) {*/
+    /*$log.info('Save Success');*/
+    /*PostSrv.originalPost = data;*/
+/*}).*/
+/*error(function (data, status, headers, config) {*/
+    /*$log.info('Save Error');*/
+/*$rootScope.$broadcast('error',{status:status, data:data, headers:headers});*/
+    /*});*/
+    /*}*/
+
+/*function MainCtrl($scope, $log, $location, $rootScope) {*/
+/*$scope.$on('error', function(event, obj){*/
+/*if(obj.status === 401){*/
+    /*$location.path('login');*/
+/*}*/
+    /*});*/
+    /*}*/
+/*MainCtrl.$inject = ['$scope', '$log', '$location', '$rootScope'];*/
+/*```*/
+
+/*In this example I am publishing an "error" event on the $rootScope, that I then capture in the MainCtrl to redirect the user to the login page.*/
+/*No matter wich Object send the  "error" event through the EventBus Pattern I have one place to responde to it.*/

@@ -3,6 +3,7 @@
 @import "compass/css3";
 @import "compass/utilities";
 
+
 $c1 : #8D000A;
 $c2 : #C21F00;
 $c3 : #D96F1F;
@@ -10,11 +11,12 @@ $c4 : #A3742A;
 $c5 : #736126;
 $c6 : #0099D2;
 
+
 $border-color: #E6E6E6;
 $para-color: #555;
 $gap: 30px;
 $nav-width: 330px;
-$content-width: 950px;
+$content-width: 1000px;
 $box-size: 85px;
 
 @font-face {
@@ -54,13 +56,10 @@ $box-size: 85px;
 
 @mixin post-title{
   color: #000000;
-  padding-left: 20px;
-  padding-top: 25px;
-  text-transform: uppercase;
+  padding: 20px;
   font-size: 33px;
   font-weight: bold;
-  padding-left: $gap;
-  white-space: nowrap;
+
 }
 
 @mixin post-time{
@@ -97,11 +96,13 @@ $box-size: 85px;
   height: $box-size;
   position: relative;
   border-bottom: solid 1px $border-color;
+  display: block;
 }
 
 
 blockquote {
-  font-size: 18px;
+  font-size: 22px;
+  line-height: 30px;
   border-color: $c1 !important;
   border-left: 10px solid;
   padding-left: 20px;
@@ -119,21 +120,20 @@ jl-markdown {
   display: block;
 }
 
-.float-warp{
-  height: 85px;
-  overflow: overlay;
-  border-bottom: solid 1px $border-color;
+.control-bar{
+  @include post-title-wrap;
 }
 
 
 .control-wrap{
-  float: right;
-  clear: both;
-  line-height: $box-size;
+
+  display: inline-block;
+  margin: 4px;
+  line-height: 75px;
   text-align: center;
-  height: $box-size;
-  width: $box-size;
-  @include border-radius(85px);
+  height: 75px;
+  width: 75px;
+  @include border-radius(75px);
   border: solid $border-color 5px;
   color: $border-color;
   &:hover {
@@ -151,11 +151,26 @@ jl-markdown {
   }
 }
 
+
+.control-title{
+  @include post-title;
+  color: $border-color;
+  padding-bottom: 5px;
+  white-space: nowrap;
+  display: inline-block;
+}
+
+.control-btn{
+  vertical-align: bottom;
+}
+
 .page-content {
 
   padding: $gap;
-  padding-right: $box-size + $gap;
+  padding-bottom: 250px;
+  padding-right: $gap;
   max-width: $content-width;
+ // border-right: solid 1px $border-color;
 
   textarea {
     width: 100%;
@@ -163,6 +178,16 @@ jl-markdown {
     border: 0px solid;
     font-size: 16px;
     color: $para-color;
+
+
+    font-size: 16px;
+    font-style: normal;
+    color: $para-color;
+    font-variant: normal;
+    font-weight: 300;
+    line-height: 26px;
+    font-family: 'lato';
+
 
     &:focus {
       outline: none;
@@ -175,23 +200,30 @@ jl-markdown {
   }
 
   strong {
-    color: #000000;
     font-weight: bold;
   }
 
   h1 {
     color: #000000;
     font-size: 28px;
-    text-transform: uppercase;
     font-weight: 700;
-    margin-bottom: $gap;
+    margin-bottom: 20px;
   }
 
   h2 {
     color: #000000;
     font-size: 24px;
-    text-transform: uppercase;
     font-weight: 700;
-    margin-bottom: $gap;
+    margin-bottom: 20px;
   }
+
+  h3 {
+    font-size: 18px;
+    font-weight: 700;
+    margin-bottom: 20px;
+  }
+}
+
+.inline-block{
+  display: inline-block;
 }

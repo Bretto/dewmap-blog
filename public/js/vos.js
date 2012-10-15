@@ -1,5 +1,5 @@
 function PostVO(date, title, text){
-    this.date = !date ? new Date().getTime(): date;
-    this.title = title;
-    this.text = text;
+    this.date = date ? date : new Date().getTime();
+    this.title = title ? title : "Post Title";
+    this.text = text ? text : "Post Content" ;
 }

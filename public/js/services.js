@@ -55,7 +55,7 @@ services.factory('PostSrv', function ($http, $log, $rootScope, $routeParams, $lo
         isSaved:true,
 
         isSavedClass:function () {
-            if (PostSrv.isSaved) return 'is-saved';
+            if (!PostSrv.isSaved) return 'is-not-saved';
         },
 
         onQuery:function () {
@@ -92,7 +92,7 @@ services.factory('PostSrv', function ($http, $log, $rootScope, $routeParams, $lo
                 }).
                 error(function (data, status, headers, config) {
                     $log.info('Delete Error');
-                    $rootScope.$broadcast('error',{status:status, data:data});
+                    $rootScope.$broadcast('error',{status:status, data:data, headers:headers});
                 });
         },
 
@@ -112,7 +112,7 @@ services.factory('PostSrv', function ($http, $log, $rootScope, $routeParams, $lo
                     }).
                     error(function (data, status, headers, config) {
                         $log.info('Create Error');
-                        $rootScope.$broadcast('error',{status:status, data:data});
+                        $rootScope.$broadcast('error',{status:status, data:data, headers:headers});
                     });
 
             } else {
@@ -125,7 +125,7 @@ services.factory('PostSrv', function ($http, $log, $rootScope, $routeParams, $lo
                     }).
                     error(function (data, status, headers, config) {
                         $log.info('Save Error');
-                        $rootScope.$broadcast('error',{status:status, data:data});
+                        $rootScope.$broadcast('error',{status:status, data:data, headers:headers});
                     });
             }
         },
@@ -134,7 +134,7 @@ services.factory('PostSrv', function ($http, $log, $rootScope, $routeParams, $lo
 
             $http.get('/api/post/' + id).
                 success(function (data) {
-                    PostSrv.originalPost = data;
+                    PostSrv.originalPost = angular.copy(data);
                     $scope.post = data;
                 });
         },
@@ -337,3 +337,4 @@ services.factory('PostSrv', function ($http, $log, $rootScope, $routeParams, $lo
 //        //'nav li:hover'
 //    }
 //});
+

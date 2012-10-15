@@ -14,8 +14,10 @@ function LoginCtrl($scope, $log, $http, $location, $routeParams, PostSrv) {
                 $scope.message = data.message;
                 PostSrv.isAdmin = true;
             }).
-            error(function () {
+            error(function (data, status, headers, config) {
                 $log.info('LoginCtrl Error');
+                $scope.message = headers().message;
+                PostSrv.isAdmin = false;
             });
     }
 }
@@ -65,17 +67,6 @@ function EditPostCtrl($scope, $log, $routeParams, PostSrv) {
             PostSrv.isSaved = false;
         }
     }
-
-//       $scope.$watch(function(){return $scope.post }, function(newValue) {
-//       //console.log(newValue);
-//       //console.log(oldValue);
-//        if(angular.equals(original, $scope.post){
-//           console.log('true');
-//       }else{
-//           console.log('false');
-//       }
-//
-//    }, true); // init
 
 }
 EditPostCtrl.$inject = ['$scope', '$log', '$routeParams', 'PostSrv'];

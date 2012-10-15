@@ -1,15 +1,17 @@
-<section id="post">
-    <article>
-        <header>
-            <time><strong>{{post.date | date:'MMM d'}}</strong><br>{{post.date | date:'yyyy'}}</time>
-            <div class="shine"></div>
-            <input ng-model="post.title"/>
-        </header>
 
+<section id="post">
+    <div class="control-bar">
         <a ng-click="PostSrv.onPreview(post)">
             <div class="control-wrap">
                 <div>
                     <i class="icon-eye-open"></i>
+                </div>
+            </div>
+        </a>
+        <a ng-click="PostSrv.onDestroy(post)">
+            <div class="control-wrap">
+                <div>
+                    <i class="icon-trash"></i>
                 </div>
             </div>
         </a>
@@ -21,24 +23,16 @@
                 </div>
             </div>
         </a>
-        <a ng-click="PostSrv.onCancel(post._id)">
-            <div class="control-wrap">
-                <div>
-                    <i class="icon-remove"></i>
-                </div>
-            </div>
-        </a>
-        <a ng-click="PostSrv.onDestroy(post)">
-            <div class="control-wrap">
-                <div>
-                    <i class="icon-trash"></i>
-                </div>
-            </div>
-        </a>
-
+    </div>
+    <article>
+        <header>
+            <input ng-model="post.title"/>
+            <time><strong>{{post.date | date:'MMM d'}}</strong> {{post.date | date:'yyyy'}}</time>
+        </header>
         <div class="page-content">
-            <textarea class="post-input" ng-model="post.text"/>
+            <!--<textarea class="post-input" ng-model="post.text"/>-->
+            <p class="contentEditable" contentEditable="true" export-html="true" ng-model="post.text"></p>
         </div>
-
     </article>
 </section>
+

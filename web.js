@@ -38,7 +38,7 @@ app.configure(function () {
 
     app.use(express.favicon());
     app.use(express.bodyParser());
-    app.use(express.methodOverride());
+    //app.use(express.methodOverride());
     app.use(express.logger('dev'));  //tiny, short, default
     app.use(express.cookieParser('shhhh, very secret'));
     app.use(express.session({ secret: "string" }));
@@ -135,9 +135,12 @@ app.get('/login', function(req, res){
     if (req.session.user) {
         req.session.success = 'Authenticated as ' + req.session.user.name;
         res.locals.message = req.session.success;
+        res.send({message:res.locals.message});
     }
-    res.send({message:res.locals.message});
-    //res.send( 401, {message:res.locals.message});
+    else{
+        res.send(401,{message:res.locals.message});
+    }
+
 });
 
 app.post('/login', function(req, res){
@@ -164,9 +167,10 @@ app.post('/login', function(req, res){
 //-----------------------
 
 
-app.get('/', routes.index);
-app.get('/post', routes.index);
+//app.get('/', routes.index);
+//app.get('/post', routes.index);
 app.get('/partials/:name', routes.partials);
+//app.get('/post/:id', routes.index);
 
 // JSON API
 
@@ -187,7 +191,7 @@ app.put('/api/:collection/:id', restrict, api.updatePost);
 //Delete
 app.del('/api/:collection/:id', restrict, api.deletePost);
 
-//app.get('*', routes.index);
+app.get('*', routes.index);
 
 app.listen(port, function() {
     console.log("Listening on " + port);
