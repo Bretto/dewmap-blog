@@ -2,20 +2,25 @@
 <html ng-app="myApp">
 <head>
     <meta charset="utf-8">
+    <!--<link rel="stylesheet" href="/lib/bootstrap/2.0.2/css/bootstrap.css"/>-->
     <link rel="stylesheet" href="/stylesheets/screen.css"/>
     <link rel="stylesheet" href="/lib/prettify/prettify.css"/>
-    <link rel="stylesheet" href="/stylesheets/font-awesome.css">
+    <!--<link rel="stylesheet" href="/stylesheets/font-awesome.css">-->
     <link href='http://fonts.googleapis.com/css?family=Lato:700,300' rel='stylesheet' type='text/css'>
     <title>Dewmap</title>
 </head>
-<body ng-controller="MainCtrl">
-
-<nav id="main-nav" ng-include src="'/partials/nav'"></nav>
+<body ng-controller="MainCtrl" class="container-fluid">
 
 
-<section id="main-content">
-    <ng-view></ng-view>
-</section>
+    <div class="row-fluid main-wrap">
+        <div class="span4 nav-wrap">
+            <nav id="main-nav" ng-include src="'/partials/nav'"></nav>
+        </div>
+        <div class="span8" id="main-content">
+            <ng-view></ng-view>
+        </div>
+    </div>
+
 
 <script type="text/javascript" src="/lib/prettify/prettify.js"></script>
 <script src="/lib/jquery/jquery-1.7.2.min.js"></script>

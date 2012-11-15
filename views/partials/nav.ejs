@@ -1,58 +1,15 @@
-<ul ng-controller="NavCtrl">
-    <li id="nav-logo">
+<div ng-controller="NavCtrl" class="row-fluid well">
+    <p>
         <a ng-click="PostSrv.onQuery()">
-            <i class="icon-logo"></i>
-
-            <div class="shine"></div>
-            <div class="logo"></div>
+            <div class="dewmap-logo"></div>
+            <div class="dewmap"></div>
         </a>
-    </li>
-    <li id="nav-posts">
-        <a ng-click="PostSrv.onQuery()">
-            <i class="icon-folder-open"></i>
-
-            <div class="shine"></div>
-            <h1>Posts</h1>
-        </a>
-    </li>
-    <li id="nav-about">
-        <a ng-click="onAbout()">
-            <i class="icon-book"></i>
-
-            <div class="shine"></div>
-            <h1>About</h1>
-        </a>
-    </li>
-    <li id="nav-contact">
-        <a ng-click="onContact()">
-            <i class="icon-envelope-alt"></i>
-
-            <div class="shine"></div>
-            <h1>Contact</h1>
-        </a>
-    </li>
-    <li id="nav-github">
-        <a ng-click="onGitHub()">
-            <i class="icon-github"></i>
-
-            <div class="shine"></div>
-            <h1>Github</h1>
-        </a>
-    </li>
-    <li id="nav-twitter">
-        <a ng-click="onTwitter()">
-            <i class="icon-twitter"></i>
-
-            <div class="shine"></div>
-            <h1>Twitter</h1>
-        </a>
-    </li>
-    <li id="nav-admin">
-        <a ng-click="PostSrv.onAdmin()">
-            <i class="icon-cog"></i>
-            <div class="shine"></div>
-            <h1>{{loginStatus}}</h1>
-        </a>
-    </li>
-</ul>
+    </p>
+    <p>
+      <button class="btn btn-large btn-block btn-inverse" type="button" ng-click="PostSrv.onQuery()">Post</button>
+    </p>
+    <p>
+        <button class="btn btn-large btn-block btn-inverse" type="button" ng-click="PostSrv.onAdmin()">{{loginStatus}}</button>
+    </p>
+</div>
 

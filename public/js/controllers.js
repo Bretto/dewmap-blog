@@ -27,7 +27,12 @@ LoginCtrl.$inject = ['$scope', '$log', '$http', '$location', '$routeParams', 'Po
 function PostsCtrl($scope, $log, $location, PostSrv) {
     $log.info('PostsCtrl');
     $scope.PostSrv = PostSrv;
-    $scope.posts = PostSrv.getPosts($scope);
+
+    var response = function(posts){
+        $scope.posts = posts
+    }
+
+    PostSrv.getPosts(response);
 }
 PostsCtrl.$inject = ['$scope', '$log', '$location', 'PostSrv'];
 
@@ -36,28 +41,50 @@ function PostCtrl($scope, $log, $location, $routeParams, PostSrv) {
     $log.info('PostCtrl');
     $scope.PostSrv = PostSrv;
 
+    var response = function(post){
+        $scope.post = post;
+    }
+
     if ($routeParams.postId === "preview") {
         $scope.post = PostSrv.editPost;
     }
     else {
-        $scope.post = PostSrv.getPost($routeParams.postId, $scope);
+        PostSrv.getPost($routeParams.postId, response);
     }
+
+
 }
 PostCtrl.$inject = ['$scope', '$log', '$location', '$routeParams', 'PostSrv'];
 
 
-function EditPostCtrl($scope, $log, $routeParams, PostSrv) {
+function EditPostCtrl($scope, $log, $routeParams, PostSrv, $timeout) {
+
+
+
     $log.info('EditPostCtrl');
+
+    $('#post-editor').autoresize();
+
     $scope.PostSrv = PostSrv;
+
+
+    var response = function(post){
+        $scope.post = post;
+        // hack for lack of a better way
+        $timeout(function() {
+            $('#post-editor').trigger('myEvent');
+        }, 0, false);
+
+    }
 
     // if there is an edited post &
     // the editPost is the post we are interested in or
     // it is a new post that we are previewing
 
     if (PostSrv.editPost && ( PostSrv.editPost._id === $routeParams.postId || PostSrv.editPost._id === undefined )) {
-        $scope.post = PostSrv.editPost;
+        response(PostSrv.editPost);
     } else {
-        $scope.post = PostSrv.getPost($routeParams.postId, $scope);
+        PostSrv.getPost($routeParams.postId, response);
     }
 
     $scope.isClean = function () {
@@ -68,8 +95,11 @@ function EditPostCtrl($scope, $log, $routeParams, PostSrv) {
         }
     }
 
+
+
+
 }
-EditPostCtrl.$inject = ['$scope', '$log', '$routeParams', 'PostSrv'];
+EditPostCtrl.$inject = ['$scope', '$log', '$routeParams', 'PostSrv', '$timeout'];
 
 
 function CreatePostCtrl($scope, $log, $location, PostSrv) {
@@ -105,6 +135,9 @@ function MainCtrl($scope, $log, $location, $rootScope) {
             $location.path('login');
         }
     });
+
+
+
 }
 MainCtrl.$inject = ['$scope', '$log', '$location', '$rootScope'];
 

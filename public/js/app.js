@@ -16,3 +16,23 @@ angular.module('myApp', ['myApp.filters', 'myApp.services', 'myApp.directives'])
 }]);
 
 
+(function($){
+    $.fn.extend({
+        autoresize: function() {
+            return this.each(function() {
+                var hiddenDiv = $(document.createElement('div'));
+                var content = null;
+                $(this).addClass('txtstuff');
+                hiddenDiv.addClass('hiddendiv common');
+                $('body').append(hiddenDiv);
+                $(this).live('input myEvent', function() {
+                    console.log('live');
+                    content = $(this).val();
+                    content = content.replace(/\n/g, '<br>');
+                    hiddenDiv.html(content + "<br class='lbr'>");
+                    $(this).css('height', hiddenDiv.height());
+                });
+            });
+        }
+    });
+})(jQuery);

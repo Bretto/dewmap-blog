@@ -1,7 +1,6 @@
 <section id="post">
-
-    <div class="control-bar">
-        <a ng-click="PostSrv.onEdit(post._id)" ng-show="PostSrv.isAdmin">
+    <div class="control-bar well-inverse" ng-show="PostSrv.isAdmin">
+        <a ng-click="PostSrv.onEdit(post._id)">
             <div class="control-wrap">
                 <div>
                     <i class="icon-pencil"></i>
@@ -9,8 +8,7 @@
             </div>
         </a>
     </div>
-
-    <article>
+    <article class="well-inverse">
         <header>
             <h1>{{post.title}}</h1>
             <time><strong>{{post.date | date:'MMM d'}}</strong> {{post.date | date:'yyyy'}}</time>
@@ -19,8 +17,4 @@
             <dp-markdown my-attr="post.text"></dp-markdown>
         </div>
     </article>
-
-
-
-
 </section>

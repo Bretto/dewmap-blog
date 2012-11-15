@@ -46,7 +46,8 @@ directives.directive('contenteditable', function ($parse) {
                 ngModelSet = ngModelGet.assign;
 
             var listener = function () {
-                if (attr.exportHtml) {
+                if (attr.exportHtml && attr.exportHtml == 'true') {
+                    // this replaces white space ( i think )
                     var value = elm.text().replace(/>\s+</g, '><');
 
                     if (ctrl.$viewValue !== value) {
@@ -57,7 +58,11 @@ directives.directive('contenteditable', function ($parse) {
                 }
                 else {
                     scope.$apply(function () {
-                        ctrl.$setViewValue(elm.html());
+                        //replace 2 spaces with 2 spaces and a new line
+                        //showdown expects 2 spaces and a new line for
+                        //line returns
+                        var test = elm.text().replace(/\s{2,}/g,'  \n');
+                        ctrl.$setViewValue(test);
                     });
                 }
 
@@ -80,13 +85,19 @@ directives.directive('contenteditable', function ($parse) {
                 }
             });
 
-
             ctrl.$render = function () {
-                if (attr.exportHtml) {
+
+                if(!ctrl.$viewValue) return
+
+
+                if (attr.exportHtml && attr.exportHtml == 'true') {
                     elm.text(ctrl.$viewValue);
                 }
                 else {
-                    elm.html(ctrl.$viewValue);
+
+//                    elm.html(ctrl.$viewValue);
+                    var test = ctrl.$viewValue.replace(/\n/g,"<br>");
+                    elm.html(test);
                 }
             };
 

@@ -9,11 +9,6 @@ var app = express.createServer(express.logger());
 var port = process.env.PORT || 5000;
 
 
-
-
-
-
-
 var allowCrossDomain = function(req, res, next) {
 
 //    var contentTypesByExtension = {

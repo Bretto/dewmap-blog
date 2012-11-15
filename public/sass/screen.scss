@@ -1,300 +1,48 @@
-/* Welcome to Compass.
- * In this file you should write your main styles. (or centralize your imports)
- * Import this file using the following HTML or equivalent:
- * <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css" /> */
-
 @import "base.scss";
 
-* {
-  -webkit-box-sizing: border-box;
-  -moz-box-sizing: border-box;
-  box-sizing: border-box;
+
+.control-btn{
+  vertical-align: bottom;
 }
 
-
-html, body {
-  margin: 0;
-  padding: 0;
-  font-size: 16px;
-  font-style: normal;
-  color: $para-color;
-  font-variant: normal;
-  font-weight: 300;
-  line-height: 26px;
-  height: 100%;
-  font-family: 'lato';
-
-  a {
-    color: black;
-    text-decoration: none;
-  }
-}
-
-
-
-
-#main-content {
-  padding-top: 2px;
-  overflow-y: scroll;
-  height: 100%;
-  margin-left: $nav-width;
-  position: relative;
-  //max-width: $content-width;
-}
-
-#main-nav {
-  margin-top: 2px;
-  margin-left: 2px;
-  float: left;
-  width: $nav-width;
-  height: 100%;
-  border-right: solid 1px $border-color;
-
-  #nav-logo {
-
-    .icon-logo {
-      background-position: center;
-      background-repeat: no-repeat;
-      background-image: url('/assets/img/logo.png');
-    }
-
-    @include nav-hover-color(#000000);
-
-    &:hover {
-      .logo {
-        background-image: url('/assets/img/dewmap_w.png');
-      }
-    }
-
-  }
-
-  #nav-posts {
-    @include nav-hover-color($c1);
-  }
-
-  #nav-about {
-    @include nav-hover-color($c2);
-  }
-
-  #nav-contact {
-    @include nav-hover-color($c3);
-  }
-
-  #nav-github {
-    @include nav-hover-color($c4);
-  }
-
-  #nav-twitter {
-    @include nav-hover-color($c5);
-  }
-
-  #nav-admin {
-    @include nav-hover-color(#000000);
-  }
-
-  li {
-
-    @include post-title-wrap;
-
-    h1 {
-      @include post-title;
-      font-size: 16px;
-      padding-top: 27px;
-      padding-left: 30px;
-      margin-left: $box-size;
-    }
-
-    i {
-      @include icon;
-    }
-
-    a {
-      width: 100%;
-      height: 100%;
-      display: inline-block;
-    }
-
-    .shine {
-      @include shine;
-      left: 5px;
-    }
-
-    .logo {
-      background-position: center;
-      background-repeat: no-repeat;
-      background-image: url('/assets/img/dewmap.png');
-      height: $box-size;
-      margin-left: $box-size;
-      margin-top: -4px;
-    }
-
-  }
-}
-
-#post-list {
-
-  max-width: $content-width;
-
-  &:first-child {
-    //border-top: solid 1px red;
-  }
-
-  li {
-    @include post-title-wrap;
-
-    &:hover {
-      background-color: #000000;
-      h1 {
-        color: #ffffff;
-      }
-      time {
-        color: #ffffff;
-      }
-    }
-
-    a {
-      //width: 100%;
-      height: 100%;
-      display: inline-block;
-    }
-
-    h1 {
-      @include post-title;
-      padding-bottom: 5px;
-      white-space: nowrap;
-
-    }
-
-    time {
-      padding-left: 20px;
-      //@include post-time;
-    }
-
-  }
-}
-
-#post {
-
-  article {
-
-    width: $content-width - 85px;
-
-    header {
-      //padding-bottom: 50px;
-
-      input {
-        @include post-title;
-        border: 0px solid;
-        padding: 0;
-        margin: 0;
-        width: 100%;
-        padding: 25px;
-        vertical-align: middle;
-        text-align: auto;
-
-        &:focus {
-          outline: none;
-        }
-      }
-
-      h1 {
-        @include post-title;
-        padding: 30px;
-
-      }
-
-      time {
-        padding-left: $gap;
-        //@include post-time;
-      }
-
-
-    }
-
-  }
-
-}
-
-#login {
-
-  header {
-    @include post-title-wrap;
-
-    h1 {
-      @include post-title;
-    }
-
-    time {
-      @include post-time;
-    }
-
-    .shine {
-      right: 5px;
-      @include shine;
-    }
-  }
-
-}
-
-.title-input-wrapper {
-  max-width: $content-width;
-  line-height: $box-size;
-  padding-left: $gap;
-  padding-right: $gap + $box-size;
-}
-
-.date-input-wrapper {
-  padding: 20px 5px;
-  width: $box-size;
-  height: $box-size;
-}
-
-.date-input {
-  width: 100%;
-  line-height: 17px;
-  font-size: 14px;
+.control-wrap{
+  display: inline-block;
+  margin: 4px;
+  line-height: 75px;
   text-align: center;
-  text-transform: uppercase;
-  resize: none;
-  //vertical-align: middle;
-}
+  height: 75px;
+  width: 75px;
 
-.title-input {
-  width: 100%;
-  padding-left: 0;
-  vertical-align: middle;
-}
-
-.is-not-admin {
-  display: none;
-}
-
-.is-not-saved {
-  color: rgba($c6,1);
-  border-color: rgba($c6,1);
-}
-
-.control-wrap-left {
-  float: left;
-  clear: both;
-  line-height: $box-size;
-  text-align: center;
-  height: $box-size;
-  width: $box-size;
-  @include border-radius(85px);
-  border: solid $border-color 5px;
-  color: $border-color;
-  &:hover {
-    border-color: $c6;
-    background: $c6;
-    i {
-      color: #ffffff;
-    }
-  }
-
-  div {
+  div{
     margin-top: -4px;
     font-size: 40px;
-    color: $border-color !important;
   }
+}
+
+.control-bar{
+  h1{
+    display: inline-block;
+  }
+}
+
+.txtstuff{
+  resize: none;
+  overflow: hidden;
+}
+
+.hiddendiv{
+  display: none;
+  white-space: pre-wrap;
+  word-wrap: break-word;
+  overflow-wrap: break-word;
+}
+
+.common{
+  width: 500px;
+  min-height: 50px;
+  overflow: hidden;
+}
+
+.lbr{
+  line-height: 3px;
 }

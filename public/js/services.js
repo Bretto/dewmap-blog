@@ -130,19 +130,19 @@ services.factory('PostSrv', function ($http, $log, $rootScope, $routeParams, $lo
             }
         },
 
-        getPost:function (id, $scope) {
-
+        getPost:function (id, cb) {
             $http.get('/api/post/' + id).
                 success(function (data) {
+                    //post.date = new Date(parseInt(post._id.slice(0,8), 16)*1000);
                     PostSrv.originalPost = angular.copy(data);
-                    $scope.post = data;
+                    cb(data);
                 });
         },
 
-        getPosts:function ($scope) {
+        getPosts:function (cb) {
             $http.get('/api/post').
                 success(function (data, status, headers, config) {
-                    $scope.posts = data;
+                    cb(data);
                 });
         }
 

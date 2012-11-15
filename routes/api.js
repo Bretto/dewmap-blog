@@ -51,7 +51,7 @@ exports.isLoggedIn = function(req, res) {
 
 //Get
 exports.posts = function(req, res) {
-    db.collection(req.params.collection).find({}).toArray(fn(req, res));
+    db.collection(req.params.collection).find({}).sort({date : -1}).toArray(fn(req, res));
 };
 
 //Get by Id

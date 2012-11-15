@@ -1,6 +1,5 @@
-
 <section id="post">
-    <div class="control-bar">
+    <div class="control-bar well-inverse">
         <a ng-click="PostSrv.onPreview(post)">
             <div class="control-wrap">
                 <div>
@@ -24,14 +23,13 @@
             </div>
         </a>
     </div>
-    <article>
+    <article class="well-inverse">
         <header>
             <input ng-model="post.title"/>
             <time><strong>{{post.date | date:'MMM d'}}</strong> {{post.date | date:'yyyy'}}</time>
         </header>
         <div class="page-content">
-            <!--<textarea class="post-input" ng-model="post.text"/>-->
-            <p class="contentEditable" contentEditable="true" export-html="true" ng-model="post.text"></p>
+            <textarea id="post-editor" class="post-input" ng-model="post.text" class="common"/>
         </div>
     </article>
 </section>
