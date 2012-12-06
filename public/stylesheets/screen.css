@@ -118,7 +118,28 @@ time {
   box-shadow: 0 1px 4px rgba(0, 0, 0, 0.065);
 }
 
-/* line 8, ../sass/screen.scss */
-.control-wrap {
-  display: inline-block;
+/* line 23, ../sass/screen.scss */
+.txtstuff {
+  resize: none;
+  overflow: hidden;
+}
+
+/* line 28, ../sass/screen.scss */
+.hiddendiv {
+  display: none;
+  white-space: pre-wrap;
+  word-wrap: break-word;
+  overflow-wrap: break-word;
+}
+
+/* line 35, ../sass/screen.scss */
+.common {
+  width: 500px;
+  min-height: 50px;
+  overflow: hidden;
+}
+
+/* line 41, ../sass/screen.scss */
+.lbr {
+  line-height: 3px;
 }

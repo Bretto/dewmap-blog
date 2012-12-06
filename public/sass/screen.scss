@@ -5,34 +5,39 @@
 //  vertical-align: bottom;
 //}
 //
-.control-wrap{
-  display: inline-block;
-}
+//.control-wrap{
+//  display: inline-block;
+//}
 //
 //.control-bar{
 //  h1{
 //    display: inline-block;
 //  }
 //}
-//
-//.txtstuff{
-//  resize: none;
-//  overflow: hidden;
-//}
-//
-//.hiddendiv{
-//  display: none;
-//  white-space: pre-wrap;
-//  word-wrap: break-word;
-//  overflow-wrap: break-word;
-//}
-//
-//.common{
-//  width: 500px;
-//  min-height: 50px;
-//  overflow: hidden;
-//}
-//
-//.lbr{
-//  line-height: 3px;
-//}
+
+
+
+
+// hack to resize the textarea on load
+
+.txtstuff{
+  resize: none;
+  overflow: hidden;
+}
+
+.hiddendiv{
+  display: none;
+  white-space: pre-wrap;
+  word-wrap: break-word;
+  overflow-wrap: break-word;
+}
+
+.common{
+  width: 500px;
+  min-height: 50px;
+  overflow: hidden;
+}
+
+.lbr{
+  line-height: 3px;
+}
