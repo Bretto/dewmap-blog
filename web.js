@@ -78,7 +78,7 @@ var users = {
 };
 
 // when you create a user, generate a salt
-// and hash the password ('foobar' is the pass here)
+// and hash the password ('login' is the pass here)
 
 hash('login', function(err, salt, hash){
     if (err) throw err;
@@ -168,6 +168,8 @@ app.get('/partials/:name', routes.partials);
 //app.get('/post/:id', routes.index);
 
 // JSON API
+
+app.get('/api/env', api.env);
 
 app.get('/api/isLoggedId', api.isLoggedIn);
 

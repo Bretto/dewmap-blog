@@ -7,7 +7,10 @@ var db = null;
 // Connect to a mongo database via URI
 // With the MongoLab addon the MONGOLAB_URI config variable is added to your
 // Heroku environment.  It can be accessed as process.env.MONGOLAB_URI
-mongo.connect(process.env.MONGOLAB_URI, {}, function(error, $db){
+
+var dbEnv = process.env.MONGOLAB_URI || 'mongodb://admin:admin@localhost:27017/test';
+
+mongo.connect(dbEnv, {}, function(error, $db){
     // console.log will write to the heroku log which can be accessed via the
     // command line as "heroku logs"
     db = $db;
@@ -48,6 +51,10 @@ exports.isLoggedIn = function(req, res) {
         res.send('user');
     }
 };
+
+exports.env = function(req, res) {
+    res.send(dbEnv);
+}
 
 //Get
 exports.posts = function(req, res) {
