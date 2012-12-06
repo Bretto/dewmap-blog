@@ -1,11 +1,8 @@
 <section id="post">
     <div class="control-bar well-inverse" ng-show="PostSrv.isAdmin">
-        <a ng-click="PostSrv.onEdit(post._id)">
-            <div class="control-wrap">
-                <div>
-                    <i class="icon-pencil"></i>
-                </div>
-            </div>
+        <a ng-click="PostSrv.onEdit(post._id)" class="btn btn-primary">
+
+                    <i class="icon-edit"></i> Edit
         </a>
     </div>
     <article class="well-inverse">

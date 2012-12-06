@@ -1,26 +1,14 @@
 <section id="post">
     <div class="control-bar well-inverse">
-        <a ng-click="PostSrv.onPreview(post)">
-            <div class="control-wrap">
-                <div>
-                    <i class="icon-eye-open"></i>
-                </div>
-            </div>
+        <a ng-click="PostSrv.onPreview(post)" class="btn btn-primary">
+            <i class="icon-eye-open"></i> Preview
         </a>
-        <a ng-click="PostSrv.onDestroy(post)">
-            <div class="control-wrap">
-                <div>
-                    <i class="icon-trash"></i>
-                </div>
-            </div>
+        <a ng-click="PostSrv.onDestroy(post)" class="btn btn-primary">
+            <i class="icon-trash"></i> Delete
         </a>
-        <a ng-click="PostSrv.onSave(post)"
+        <a ng-click="PostSrv.onSave(post)" class="btn btn-primary"
            ng-class="PostSrv.isSavedClass()" ng-disabled="isClean()">
-            <div class="control-wrap">
-                <div>
-                    <i class="icon-save" ng-class="PostSrv.isSavedClass()"></i>
-                </div>
-            </div>
+            <i class="icon-check" ng-class="PostSrv.isSavedClass()"></i> Save
         </a>
     </div>
     <article class="well-inverse">

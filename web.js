@@ -169,8 +169,6 @@ app.get('/partials/:name', routes.partials);
 
 // JSON API
 
-app.get('/api/env', api.env);
-
 app.get('/api/isLoggedId', api.isLoggedIn);
 
 //Query

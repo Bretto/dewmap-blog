@@ -1,20 +1,15 @@
 <div id="post-list" ng-controller="PostsCtrl">
-    <a class="control-bar" ng-click="PostSrv.onNew()" ng-show="PostSrv.isAdmin">
-        <div class="control-wrap">
-            <div>
-                <i class="icon-plus"></i>
-            </div>
-        </div>
-        <h1 class="control-title">Add New Post</h1>
+    <a class="btn btn-primary" ng-click="PostSrv.onNew()" ng-show="PostSrv.isAdmin">
+
+                <i class="icon-plus"></i> Add
+
     </a>
     <ul>
         <li ng-repeat="post in posts" class="well-inverse">
-            <a ng-click="PostSrv.onDestroy(post)" ng-show="PostSrv.isAdmin" class="control-btn">
-                <div class="control-wrap">
-                    <div>
-                        <i class="icon-trash"></i>
-                    </div>
-                </div>
+            <a ng-click="PostSrv.onDestroy(post)" ng-show="PostSrv.isAdmin" class="btn btn-primary">
+
+                        <i class="icon-trash"></i> Delete
+
             </a>
             <a ng-click="PostSrv.onRead(post._id)" class="post-test">
                 <h1>{{post.title}}</h1>

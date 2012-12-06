@@ -52,9 +52,6 @@ exports.isLoggedIn = function(req, res) {
     }
 };
 
-exports.env = function(req, res) {
-    res.send(dbEnv);
-}
 
 //Get
 exports.posts = function(req, res) {
