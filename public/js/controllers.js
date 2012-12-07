@@ -8,7 +8,7 @@ function LoginCtrl($scope, $log, $http, $location, $routeParams, PostSrv) {
     $scope.message = '';
 
     $scope.onSubmit = function(user){
-        $http.post('/login', user).
+        $http.post('/users', user).
             success(function (data) {
                 $log.info('LoginCtrl Success');
                 $scope.message = data.message;
