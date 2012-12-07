@@ -1,17 +1,15 @@
 <section id="post">
-    <div class="control-bar well-inverse" ng-show="PostSrv.isAdmin">
-        <a ng-click="PostSrv.onEdit(post._id)" class="btn btn-primary">
+    <a ng-click="PostSrv.onEdit(post._id)" class="btn btn-primary" ng-show="PostSrv.isAdmin">
 
-                    <i class="icon-edit"></i> Edit
-        </a>
-    </div>
-    <article class="well-inverse">
-        <header>
+        <i class="icon-edit"></i> Edit
+    </a>
+    <article>
+        <div class="page-header">
             <h1>{{post.title}}</h1>
-            <time><strong>{{post.date | date:'MMM d'}}</strong> {{post.date | date:'yyyy'}}</time>
-        </header>
-        <div class="page-content">
-            <dp-markdown my-attr="post.text"></dp-markdown>
         </div>
+        <p class="lead">
+            <time>{{post.date | date:'MMM d yyyy'}}</time>
+        </p>
+        <dp-markdown my-attr="post.text"></dp-markdown>
     </article>
 </section>

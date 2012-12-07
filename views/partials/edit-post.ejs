@@ -1,5 +1,5 @@
 <section id="post">
-    <div class="control-bar well-inverse">
+    <div class="control-bar">
         <a ng-click="PostSrv.onPreview(post)" class="btn btn-primary">
             <i class="icon-eye-open"></i> Preview
         </a>
@@ -11,13 +11,13 @@
             <i class="icon-check" ng-class="PostSrv.isSavedClass()"></i> Save
         </a>
     </div>
-    <article class="well-inverse">
-        <header>
+    <article>
             <input ng-model="post.title"/>
-            <time><strong>{{post.date | date:'MMM d'}}</strong> {{post.date | date:'yyyy'}}</time>
-        </header>
+            <p class="lead">
+                <time>{{post.date | date:'MMM d yyyy'}}</time>
+            </p>
         <div class="page-content">
-            <textarea id="post-editor" class="post-input" ng-model="post.text" class="common"/>
+            <textarea id="post-editor" class="post-input common" ng-model="post.text"/>
         </div>
     </article>
 </section>

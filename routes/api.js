@@ -2,7 +2,7 @@
 
 var mongo = require('mongodb');
 var ObjectID = require('mongodb').ObjectID;
-var db = null;
+var db;
 
 // Connect to a mongo database via URI
 // With the MongoLab addon the MONGOLAB_URI config variable is added to your
@@ -13,7 +13,7 @@ var dbEnv = process.env.MONGOLAB_URI || 'mongodb://admin:admin@localhost:27017/t
 mongo.connect(dbEnv, {}, function(error, $db){
     // console.log will write to the heroku log which can be accessed via the
     // command line as "heroku logs"
-    db = $db;
+    module.exports.db = db = $db;
     db.addListener("error", function(error){
         console.log("Error connecting to MongoLab");
     });

@@ -1,26 +1,66 @@
 <!DOCTYPE html>
-<html ng-app="myApp">
+<html lang="en" ng-app="myApp">
 <head>
-    <link rel="stylesheet" href="/libs/bootstrap/css/bootstrap.css"/>
+    <meta charset="utf-8">
+    <title>Blog Dewmap</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="">
+    <meta name="author" content="">
+
+    <!-- Le styles -->
+    <link href="/libs/bootstrap/css/bootstrap.css" rel="stylesheet">
+    <style type="text/css">
+        body {
+            padding-top: 60px;
+            padding-bottom: 40px;
+        }
+    </style>
+    <link href="/libs/bootstrap/css/bootstrap-responsive.css" rel="stylesheet">
     <link rel="stylesheet" href="/stylesheets/screen.css"/>
     <link rel="stylesheet" href="/libs/prettify/prettify.css"/>
-    <title>Dewmap</title>
+
+    <!-- HTML5 shim, for IE6-8 support of HTML5 elements -->
+    <!--[if lt IE 9]>
+    <script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+
 </head>
-<body ng-controller="MainCtrl" class="container-fluid">
 
+<body ng-controller="MainCtrl">
 
-    <div class="row-fluid main-wrap">
-        <div class="span4 nav-wrap">
-            <nav id="main-nav" ng-include src="'/partials/nav'"></nav>
-        </div>
-        <div class="span8" id="main-content">
-            <ng-view></ng-view>
+<div class="navbar navbar-inverse navbar-fixed-top" ng-controller="NavCtrl">
+    <div class="navbar-inner">
+        <div class="container">
+            <a class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse">
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </a>
+            <a class="brand" ng-click="PostSrv.onQuery()">Dewmap</a>
+
+            <div class="nav-collapse collapse">
+                <ul class="nav">
+                    <!--<li class="active"><a href="#">Posts</a></li>-->
+                </ul>
+                <form class="navbar-form pull-right" ng-controller="LoginCtrl">
+                    <input class="span2" type="text" placeholder="Email" name="username" ng-model="user.username">
+                    <input class="span2" type="password" placeholder="Password" name="password" ng-model="user.password">
+                    <button type="submit" class="btn" ng-click="onSubmit(user)">Sign in</button>
+                </form>
+            </div>
+            <!--/.nav-collapse -->
         </div>
     </div>
+</div>
 
+<div class="container">
+    <ng-view></ng-view>
+</div>
+<!-- /container -->
 
 <script type="text/javascript" src="/libs/prettify/prettify.js"></script>
 <script src="/libs/jquery/jquery-1.7.2.min.js"></script>
+<script src="/libs/bootstrap/js/bootstrap.js"></script>
 <script src="/libs/angular/angular.js"></script>
 <script src="/libs/angular/angular-resource.js"></script>
 <script src="/libs/hammer/hammer.js"></script>

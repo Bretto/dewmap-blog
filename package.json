@@ -4,7 +4,8 @@
     "dependencies": {
         "express": "2.5.x",
         "ejs": "*",
-        "mongodb": "1.0.X"
+        "mongodb": "1.0.X",
+        "bcrypt": "*"
     },
     "engines": {
         "node": "0.6.x"
