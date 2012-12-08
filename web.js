@@ -69,21 +69,8 @@ app.configure('production', function () {
 
 
 
-// dummy database
 
-var users = {
-    brett:{ name:'brett' }
-};
 
-// when you create a user, generate a salt
-// and hash the password ('login' is the pass here)
-
-//hash('login', function(err, salt, hash){
-//    if (err) throw err;
-//    // store the salt & hash in the "db"
-//    users.brett.salt = salt;
-//    users.brett.hash = hash;
-//});
 
 
 // Authenticate using our plain-object database of doom!
