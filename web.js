@@ -64,51 +64,27 @@ app.configure('production', function () {
 });
 
 
-//-------- LOGIN --------
-// Session-persisted message middleware
 
-
-
-
-
-
-
-// Authenticate using our plain-object database of doom!
 function authenticate(usr, psw, fn) {
-    if (!module.parent) console.log('authenticating %s:%s', usr, psw);
-//    var user = users[name];
-    // query the db for the given username
-//    if (!user) return fn(new Error('cannot find user'));
-    // apply the same algorithm to the POSTed password, applying
-    // the hash against the pass / salt, if there is a match we
-    // found the user
 
-    api.db.collection('users').find({usr:usr, psw:psw}).toArray(function (err, res) {
-        if (err) console.log("Error find usr/psw");
-        else {
+    api.db.collection('users').find({usr:usr}).toArray(function (err, res) {
+        if (err) return next(err);
 
-            if(res.length  > 0){
-                console.log("did find user");
-                var user = res[0];
-                bcrypt.compare(user.psw, user.hash, function(err, res) {
-                    if (err) throw err;
-                    console.log("correct password");
+        if(res.length  > 0){
+            var user = res[0];
+            bcrypt.compare(psw, user.psw, function(err, res) {
+                if (err) throw err;
+                if(res){
                     return fn(null, user);
-                });
-            }else{
-                fn(new Error('invalid user/password'));
-            }
+                }else{
+                    fn(new Error('invalid user/password'));
+                }
 
-
-//            hash(user.psw, user.salt, function (err, hashPsw) {
-//                if (err) return fn(err);
-//                if (hashPsw == user.hash) {
-//                    console.log("correct password");
-//                    return fn(null, user);
-//                }
-//                fn(new Error('invalid password'));
-//            })
+            });
+        }else{
+            fn(new Error('invalid user/password'));
         }
+
     });
 
 
@@ -177,8 +153,6 @@ app.post('/users', function (req, res) {
     var psw = req.body.password;
     var hashPsw;
 
-// when you create a user, generate a salt
-// and hash the password
     bcrypt.genSalt(SALT_WORK_FACTOR, function (err, salt) {
         if (err) return next(err);
 
@@ -187,25 +161,16 @@ app.post('/users', function (req, res) {
             if (err) return next(err);
 
             // override the cleartext password with the hashed one
-            hashPsw = hash;
+            psw = hash;
 
-            api.db.collection('users').save({usr:usr, psw:psw, salt:salt, hash:hash }, {safe:true}, function (err, saved) {
+            api.db.collection('users').save({usr:usr, psw:psw}, {safe:true}, function (err, saved) {
                 if (err || !saved) console.log("User not saved");
                 else console.log("User saved");
             });
-            //next();
+            next();
         });
     });
 
-
-//    hash('login', function(err, saltPsw, hashPsw){
-//        if (err) throw err;
-//
-//        api.db.collection('users').save({usr:usr, psw:psw, salt:saltPsw, hash:hash64 }, {safe:true}, function(err, saved) {
-//            if( err || !saved ) console.log("User not saved");
-//            else console.log("User saved");
-//        });
-//    });
 
 });
 
