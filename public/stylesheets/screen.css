@@ -1,53 +1,53 @@
-/* line 8, ../sass/base.scss */
+/* line 6, ../sass/base.scss */
 * {
   -webkit-box-sizing: border-box;
   -moz-box-sizing: border-box;
   box-sizing: border-box;
 }
 
-/* line 20, ../sass/base.scss */
+/* line 13, ../sass/base.scss */
 ul, li {
   padding: 0;
   margin: 0;
 }
 
-/* line 27, ../sass/base.scss */
+/* line 19, ../sass/base.scss */
 form input {
   height: 30px !important;
 }
 
-/* line 66, ../sass/base.scss */
+/* line 41, ../sass/base.scss */
 #posts li {
   list-style: none;
 }
-/* line 68, ../sass/base.scss */
+/* line 43, ../sass/base.scss */
 #posts li a {
   text-decoration: none;
 }
-/* line 72, ../sass/base.scss */
+/* line 47, ../sass/base.scss */
 #posts li h2 {
   color: #5a5a5a;
 }
-/* line 77, ../sass/base.scss */
+/* line 52, ../sass/base.scss */
 #posts li:hover h2 {
   color: #000000;
 }
-/* line 80, ../sass/base.scss */
+/* line 55, ../sass/base.scss */
 #posts li:hover time {
   color: #005580;
 }
-/* line 85, ../sass/base.scss */
+/* line 60, ../sass/base.scss */
 #posts li hr, #posts li .lead {
   margin: 0;
   padding: 0;
 }
-/* line 90, ../sass/base.scss */
+/* line 65, ../sass/base.scss */
 #posts li time {
   display: block;
   padding-bottom: 20px;
 }
 
-/* line 99, ../sass/base.scss */
+/* line 74, ../sass/base.scss */
 #post input {
   border: 0px solid;
   padding: 0;
@@ -62,11 +62,11 @@ form input {
   color: inherit;
   text-rendering: optimizelegibility;
 }
-/* line 124, ../sass/base.scss */
+/* line 99, ../sass/base.scss */
 #post p, #post blockquote {
   margin: 0 0 30px;
 }
-/* line 128, ../sass/base.scss */
+/* line 103, ../sass/base.scss */
 #post textarea {
   width: 100%;
   border: 0px solid;
@@ -75,18 +75,22 @@ form input {
   -moz-box-shadow: 0 0 0 rgba(0, 0, 0, 0);
   box-shadow: 0 0 0 rgba(0, 0, 0, 0);
 }
-/* line 134, ../sass/base.scss */
+/* line 109, ../sass/base.scss */
 #post textarea:focus {
   outline: none;
 }
+/* line 114, ../sass/base.scss */
+#post time {
+  color: #0088cc;
+}
 
-/* line 23, ../sass/screen.scss */
+/* line 5, ../sass/screen.scss */
 .txtstuff {
   resize: none;
   overflow: hidden;
 }
 
-/* line 28, ../sass/screen.scss */
+/* line 10, ../sass/screen.scss */
 .hiddendiv {
   display: none;
   white-space: pre-wrap;
@@ -94,14 +98,14 @@ form input {
   overflow-wrap: break-word;
 }
 
-/* line 35, ../sass/screen.scss */
+/* line 17, ../sass/screen.scss */
 .common {
   width: 500px;
   min-height: 50px;
   overflow: hidden;
 }
 
-/* line 41, ../sass/screen.scss */
+/* line 23, ../sass/screen.scss */
 .lbr {
   line-height: 3px;
 }

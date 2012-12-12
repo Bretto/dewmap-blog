@@ -1,9 +1,6 @@
 var express = require('express')
     , bcrypt = require('bcrypt')
-//, hash = require('./pass').hash
     , routes = require('./routes')
-    , mongo = require('mongodb')
-    , ObjectID = require('mongodb').ObjectID
     , api = require('./routes/api')
     , SALT_WORK_FACTOR = 10;
 
@@ -32,21 +29,21 @@ app.configure(function () {
     app.use(express.favicon());
     app.use(express.bodyParser());
     app.use(express.logger('dev'));  //tiny, short, default
-    app.use(express.cookieParser('shhhh, very secret'));
+    app.use(express.cookieParser('shhhh, this is very secret'));
     app.use(express.session({ secret:"string" }));
 
-    app.use(function (req, res, next) {
-        console.log('Middleware' + res);
-        var err = req.session.error
-            , msg = req.session.success;
-        delete req.session.error;
-        delete req.session.success;
-        res.locals.message = '';
-        if (err) res.locals.message = '<p class="msg error">' + err + '</p>';
-        if (msg) res.locals.message = '<p class="msg success">' + msg + '</p>';
-
-        next();
-    });
+//    app.use(function (req, res, next) {
+//        console.log('Middleware' + res);
+//        var err = req.session.error
+//            , msg = req.session.success;
+//        delete req.session.error;
+//        delete req.session.success;
+//        res.locals.message = '';
+//        if (err) res.locals.message = '<div class="alert alert-error"><p>' + err + '</p></div>';
+//        if (msg) res.locals.message = '<div class="alert alert-success"><p>' + msg + '</p></div>';
+//
+//        next();
+//    });
 
     //app.use(allowCrossDomain);
     app.use(express.static(__dirname + '/public'));
@@ -84,24 +81,31 @@ function authenticate(usr, psw, fn) {
         }else{
             fn(new Error('invalid user/password'));
         }
-
     });
-
-
-}
-
-function restrict(req, res, next) {
-    if (req.session && req.session.user) {
-        next();
-    } else {
-        req.session.error = 'Access denied!';
-        res.send(401);
-    }
 }
 
 
-app.get('/restricted', restrict, function (req, res) {
-    res.send('Wahoo! restricted area');
+
+
+
+
+app.post('/login', function (req, res) {
+    authenticate(req.body.username, req.body.password, function (err, user) {
+        if (user) {
+            // Regenerate session when signing in
+            // to prevent fixation
+            req.session.regenerate(function () {
+                req.session.user = user;
+                req.session.success = 'Authenticated as ' + req.session.user.usr;
+                res.locals.message = '<div class="alert alert-success">' + req.session.success + '<button type="button" class="close" data-dismiss="alert">×</button></div>';
+                res.send({message:res.locals.message});
+            });
+        } else {
+            req.session.error = 'Authentication failed, please check your username and password.'
+            res.locals.message = '<div class="alert alert-error">' + req.session.error + '<button type="button" class="close" data-dismiss="alert">×</button></div>';
+            res.send(401, {message:res.locals.message});
+        }
+    });
 });
 
 app.get('/logout', function (req, res) {
@@ -112,70 +116,43 @@ app.get('/logout', function (req, res) {
     });
 });
 
-app.get('/login', function (req, res) {
-    if (req.session.user) {
-        req.session.success = 'Authenticated as ' + req.session.user.name;
-        res.locals.message = req.session.success;
-        res.send({message:res.locals.message});
+// to register admin users
+//app.post('/users', function (req, res) {
+//
+//    var usr = req.body.username;
+//    var psw = req.body.password;
+//    var hashPsw;
+//
+//    bcrypt.genSalt(SALT_WORK_FACTOR, function (err, salt) {
+//        if (err) return next(err);
+//
+//        // hash the password using our new salt
+//        bcrypt.hash(psw, salt, function (err, hash) {
+//            if (err) return next(err);
+//
+//            // override the cleartext password with the hashed one
+//            psw = hash;
+//
+//            api.db.collection('users').save({usr:usr, psw:psw}, {safe:true}, function (err, saved) {
+//                if (err || !saved) console.log("User not saved");
+//                else console.log("User saved");
+//            });
+//            next();
+//        });
+//    });
+//
+//
+//});
+
+
+function restrict(req, res, next) {
+    if (req.session && req.session.user) {
+        next();
+    } else {
+        req.session.error = 'Access denied!';
+        res.send(401);
     }
-    else {
-        res.send(401, {message:res.locals.message});
-    }
-
-});
-
-app.post('/login', function (req, res) {
-    authenticate(req.body.username, req.body.password, function (err, user) {
-        if (user) {
-            // Regenerate session when signing in
-            // to prevent fixation
-            req.session.regenerate(function () {
-                // Store the user's primary key
-                // in the session store to be retrieved,
-                // or in this case the entire user object
-
-                req.session.user = user;
-                res.redirect('/login');
-            });
-        } else {
-            req.session.error = 'Authentication failed, please check your '
-                + ' username and password.'
-                + ' (use "brett" and "login")';
-            res.redirect('/login');
-        }
-    });
-});
-
-
-app.post('/users', function (req, res) {
-
-    var usr = req.body.username;
-    var psw = req.body.password;
-    var hashPsw;
-
-    bcrypt.genSalt(SALT_WORK_FACTOR, function (err, salt) {
-        if (err) return next(err);
-
-        // hash the password using our new salt
-        bcrypt.hash(psw, salt, function (err, hash) {
-            if (err) return next(err);
-
-            // override the cleartext password with the hashed one
-            psw = hash;
-
-            api.db.collection('users').save({usr:usr, psw:psw}, {safe:true}, function (err, saved) {
-                if (err || !saved) console.log("User not saved");
-                else console.log("User saved");
-            });
-            next();
-        });
-    });
-
-
-});
-
-
-//-----------------------
+}
 
 
 //app.get('/', routes.index);

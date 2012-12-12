@@ -1,8 +1,7 @@
-<section id="post">
-    <a ng-click="PostSrv.onEdit(post._id)" class="btn btn-primary" ng-show="PostSrv.isAdmin">
-
+<section id="post" ng-controller="PostCtrl">
+    <button ng-click="postService.onEdit(post._id)" class="btn btn-primary" ng-show="postService.isLoggedIn">
         <i class="icon-edit"></i> Edit
-    </a>
+    </button>
     <article>
         <div class="page-header">
             <h1>{{post.title}}</h1>

@@ -5,57 +5,24 @@ var services = angular.module('myApp.services', []);
 
 services.constant('endPointPrefix', '/api/post');
 
-
-services.factory('HttpCache', function ($cacheFactory) {
-    //To get the Resource to cache response
-    return $cacheFactory('HttpCacheName');
-});
+services.factory('PostService', function ($http, $log, $rootScope, $routeParams, $location, endPointPrefix) {
 
 
-services.factory('PostSrv', function ($http, $log, $rootScope, $routeParams, $location, HttpCache, endPointPrefix) {
+    var PostService = {
 
-    function deleteCachedPost(id) {
-        var cacheKey = getCacheKey(id);
-        if (HttpCache.get(cacheKey)) {
-            PostSrv.cache.remove(cacheKey);
-        }
-    }
-
-    function getCacheKey(id) {
-        var PORT = ( $location.port() === null ) ? '' : ':' + $location.port();
-        var KEY = $location.protocol() + '://' + $location.host() + PORT + endPointPrefix;
-
-        if (id !== undefined) {
-            KEY += '/' + id;
-        }
-        return KEY;
-    }
-
-
-    var PostSrv = {
+        //clean
+        //dirty
 
         origPost:null,
         editPost:null,
-        cache:HttpCache,
-        isAdmin:false,
+        isLoggedIn:false,
 
-        onAdmin:function () {
-
-            if(PostSrv.isAdmin){
-                $http.get('/logout').
-                    success(function (data) {
-                        $log.info('Logged out !');
-                    });
-                PostSrv.isAdmin = false;
-            }else{
-                $location.path("login");
-            }
-        },
-
-        isSaved:true,
-
-        isSavedClass:function () {
-            if (!PostSrv.isSaved) return 'is-not-saved';
+        onLogout:function () {
+            $http.get('/logout').
+                success(function (data) {
+                    $log.info('Logged out !');
+                });
+            PostService.isLoggedIn = false;
         },
 
         onQuery:function () {
@@ -64,11 +31,6 @@ services.factory('PostSrv', function ($http, $log, $rootScope, $routeParams, $lo
 
         onRead:function (id) {
             $location.path("post/" + id);
-        },
-
-        onPreview:function (post) {
-            PostSrv.editPost = post;
-            $location.path("post/preview");
         },
 
         onEdit:function (id) {
@@ -84,8 +46,6 @@ services.factory('PostSrv', function ($http, $log, $rootScope, $routeParams, $lo
         },
 
         onDestroy:function (post) {
-            deleteCachedPost();
-
             $http.delete('/api/post/' + post._id).
                 success(function (data) {
                     $location.path('post/');
@@ -98,16 +58,12 @@ services.factory('PostSrv', function ($http, $log, $rootScope, $routeParams, $lo
 
         onSave:function (post) {
 
-            // delete the cached post listing as a
-            // post was updated or created
-            deleteCachedPost(); // the 'post' is implied
-
             if (post._id == undefined) {
 
                 $http.post('/api/post', post).
                     success(function (data) {
                         $log.info('Create Success');
-                        PostSrv.originalPost = data;
+                        PostService.originalPost = data;
                         $location.path('post/' + data._id + '/edit');
                     }).
                     error(function (data, status, headers, config) {
@@ -116,12 +72,11 @@ services.factory('PostSrv', function ($http, $log, $rootScope, $routeParams, $lo
                     });
 
             } else {
-                deleteCachedPost(post._id);
 
                 $http.put('/api/post/' + post._id, angular.extend({}, post, {_id:undefined})).
                     success(function (data) {
                         $log.info('Save Success');
-                        PostSrv.originalPost = data;
+                        PostService.originalPost = data;
                     }).
                     error(function (data, status, headers, config) {
                         $log.info('Save Error');
@@ -134,7 +89,7 @@ services.factory('PostSrv', function ($http, $log, $rootScope, $routeParams, $lo
             $http.get('/api/post/' + id).
                 success(function (data) {
                     //post.date = new Date(parseInt(post._id.slice(0,8), 16)*1000);
-                    PostSrv.originalPost = angular.copy(data);
+                    PostService.originalPost = angular.copy(data);
                     cb(data);
                 });
         },
@@ -152,14 +107,14 @@ services.factory('PostSrv', function ($http, $log, $rootScope, $routeParams, $lo
         success(function (data) {
             if(data === 'admin'){
                 $log.info('you are logged-in');
-                PostSrv.isAdmin = true;
+                PostService.isLoggedIn = true;
             }else{
                 $log.info('you are not logged-in');
-                PostSrv.isAdmin = false;
+                PostService.isLoggedIn = false;
             }
         });
 
-    return PostSrv;
+    return PostService;
 });
 
 

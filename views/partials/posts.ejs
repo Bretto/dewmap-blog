@@ -1,5 +1,5 @@
-<div ng-controller="PostsCtrl">
-    <a class="btn btn-primary" ng-click="PostSrv.onNew()" ng-show="PostSrv.isAdmin">
+<section ng-controller="PostsCtrl">
+    <a class="btn btn-primary" ng-click="postService.onNew()" ng-show="postService.isLoggedIn">
 
         <i class="icon-plus"></i> Add
 
@@ -8,7 +8,7 @@
         <li ng-repeat="post in posts">
             <div class="row">
                 <div class="span12">
-                    <a ng-click="PostSrv.onRead(post._id)" class="post-test">
+                    <a ng-click="postService.onRead(post._id)" class="post-test">
                         <h2>{{post.title}}</h2>
                         <p class="lead">
                             <time>{{post.date | date:'MMM d yyyy'}}</time>
@@ -19,6 +19,6 @@
             <hr>
         </li>
     </ul>
-</div>
+</section>
 
 
