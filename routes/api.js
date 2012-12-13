@@ -41,13 +41,15 @@ var fn = function (req, res) {
 
 
 exports.isLoggedIn = function(req, res) {
-    console.log("isLoggedIn");
+
 
     if (req.session && req.session.user) {
+        console.log("is Admin");
         res.send('admin');
     }
     else
     {
+        console.log("is User");
         res.send('user');
     }
 };

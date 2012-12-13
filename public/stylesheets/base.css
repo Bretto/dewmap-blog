@@ -5,49 +5,48 @@
   box-sizing: border-box;
 }
 
-/* line 13, ../sass/base.scss */
-ul, li {
-  padding: 0;
-  margin: 0;
-}
-
 /* line 19, ../sass/base.scss */
 form input {
   height: 30px !important;
 }
 
-/* line 41, ../sass/base.scss */
+/* line 40, ../sass/base.scss */
+#posts {
+  padding: 0;
+  margin: 0;
+}
+/* line 44, ../sass/base.scss */
 #posts li {
   list-style: none;
 }
-/* line 43, ../sass/base.scss */
+/* line 46, ../sass/base.scss */
 #posts li a {
   text-decoration: none;
 }
-/* line 47, ../sass/base.scss */
+/* line 50, ../sass/base.scss */
 #posts li h2 {
   color: #5a5a5a;
 }
-/* line 52, ../sass/base.scss */
+/* line 55, ../sass/base.scss */
 #posts li:hover h2 {
   color: #000000;
 }
-/* line 55, ../sass/base.scss */
+/* line 58, ../sass/base.scss */
 #posts li:hover time {
   color: #005580;
 }
-/* line 60, ../sass/base.scss */
+/* line 63, ../sass/base.scss */
 #posts li hr, #posts li .lead {
   margin: 0;
   padding: 0;
 }
-/* line 65, ../sass/base.scss */
+/* line 68, ../sass/base.scss */
 #posts li time {
   display: block;
   padding-bottom: 20px;
 }
 
-/* line 74, ../sass/base.scss */
+/* line 77, ../sass/base.scss */
 #post input {
   border: 0px solid;
   padding: 0;
@@ -62,11 +61,11 @@ form input {
   color: inherit;
   text-rendering: optimizelegibility;
 }
-/* line 99, ../sass/base.scss */
+/* line 102, ../sass/base.scss */
 #post p, #post blockquote {
   margin: 0 0 30px;
 }
-/* line 103, ../sass/base.scss */
+/* line 106, ../sass/base.scss */
 #post textarea {
   width: 100%;
   border: 0px solid;
@@ -75,11 +74,11 @@ form input {
   -moz-box-shadow: 0 0 0 rgba(0, 0, 0, 0);
   box-shadow: 0 0 0 rgba(0, 0, 0, 0);
 }
-/* line 109, ../sass/base.scss */
+/* line 112, ../sass/base.scss */
 #post textarea:focus {
   outline: none;
 }
-/* line 114, ../sass/base.scss */
+/* line 117, ../sass/base.scss */
 #post time {
   color: #0088cc;
 }

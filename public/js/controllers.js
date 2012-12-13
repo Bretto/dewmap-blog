@@ -64,12 +64,12 @@ function MainCtrl($scope, $log, $location, $rootScope, $http, PostService) {
         $http.post('/login', user).
             success(function (data) {
                 $log.info('Login Success');
-                $('#notifications').append(data.message);
+                $('#notifications').prepend(data.message);
                 PostService.isLoggedIn = true;
             }).
             error(function (data, status, headers, config) {
                 $log.info('Login Error');
-                $('#notifications').append(headers().message);
+                $('#notifications').prepend(headers().message);
                 PostService.isLoggedIn = false;
             });
     }

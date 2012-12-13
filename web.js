@@ -32,19 +32,6 @@ app.configure(function () {
     app.use(express.cookieParser('shhhh, this is very secret'));
     app.use(express.session({ secret:"string" }));
 
-//    app.use(function (req, res, next) {
-//        console.log('Middleware' + res);
-//        var err = req.session.error
-//            , msg = req.session.success;
-//        delete req.session.error;
-//        delete req.session.success;
-//        res.locals.message = '';
-//        if (err) res.locals.message = '<div class="alert alert-error"><p>' + err + '</p></div>';
-//        if (msg) res.locals.message = '<div class="alert alert-success"><p>' + msg + '</p></div>';
-//
-//        next();
-//    });
-
     //app.use(allowCrossDomain);
     app.use(express.static(__dirname + '/public'));
     app.use(app.router);
@@ -140,8 +127,6 @@ app.get('/logout', function (req, res) {
 //            next();
 //        });
 //    });
-//
-//
 //});
 
 
@@ -184,3 +169,7 @@ app.get('*', routes.index);
 app.listen(port, function () {
     console.log("Listening on " + port);
 });
+
+
+
+
