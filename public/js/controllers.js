@@ -10,6 +10,24 @@ function PostsCtrl($scope, $log, $location, PostService) {
 function PostCtrl($scope, $log, $location, $routeParams, PostService) {
     $log.info('PostCtrl');
     $scope.postService = PostService;
+
+
+    if(typeof DISQUS !== 'undefined'){
+        DISQUS.reset();
+    }
+
+
+    var disqus_shortname = 'dewmap';
+    var disqus_identifier = $routeParams.postId;
+//    var disqus_url = document.URL;
+
+    /* * * DON'T EDIT BELOW THIS LINE * * */
+    (function() {
+        var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+        dsq.src = 'http://' + disqus_shortname + '.disqus.com/embed.js';
+        (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    })();
+
 }
 
 
